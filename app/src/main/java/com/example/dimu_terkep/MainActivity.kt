@@ -6,24 +6,24 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import com.livinglifetechway.quickpermissions.annotations.WithPermissions
 
 import kotlinx.android.synthetic.main.activity_main.*
-
-
+import kotlinx.android.synthetic.main.activity_map.*
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var btnMap: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { view ->
+        btnMap=findViewById(R.id.btnMap)
+        btnMap.setOnClickListener {
             createMap()
         }
-
 
     }
 

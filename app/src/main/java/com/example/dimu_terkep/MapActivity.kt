@@ -12,14 +12,20 @@ import android.preference.PreferenceManager
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
+import com.example.dimu_terkep.data.Institution
 import kotlinx.android.synthetic.main.content_map.*
 import org.osmdroid.config.Configuration
+import org.osmdroid.views.overlay.Marker
+import java.util.*
 
 
 class MapActivity : AppCompatActivity() {
     private lateinit var map: MapView
     private lateinit var seekBar:SeekBar
     private lateinit var tv:TextView
+
+    private val inst =ArrayList<Institution>();
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
@@ -40,6 +46,10 @@ class MapActivity : AppCompatActivity() {
         mapController.setCenter(startPoint)
         seekBar=findViewById(R.id.simpleSeekBar)
         tv=findViewById(R.id.tvProgress)
+        seekBar.max=Calendar.getInstance().get(Calendar.YEAR)
+        seekBar.progress=Calendar.getInstance().get(Calendar.YEAR)
+        tv.text=seekBar.progress.toString()
+
         seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
@@ -52,6 +62,30 @@ class MapActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar) {
             }
         })
+        initList()
+        addMarkers()
+    }
+
+    private fun initList(){
+        inst.add(Institution("Fiatal Iparművészek Stúdiója Egyesület",47.5069605, 19.0528687, map))
+        inst.add(Institution("Ar2day Gallery",47.50866, 19.04836, map))
+    }
+
+    private fun addMarkers(){
+
+        for(i in inst){
+            i.getMarker().setOnMarkerClickListener(object: Marker.OnMarkerClickListener{
+                override fun onMarkerClick(marker: Marker?, mapView: MapView?): Boolean {
+                    Toast.makeText(applicationContext,i.getName(),Toast.LENGTH_SHORT).show()
+                    return true
+                }
+            })
+            map.overlays.add(i.getMarker())
+            System.out.println(i.getMarker().position.latitude.toString() + " " +i.getMarker().position.longitude.toString())
+        }
+
+
+
     }
 
     override fun onResume() {
