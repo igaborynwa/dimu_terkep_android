@@ -1,6 +1,12 @@
 <resources>
-    <string name="app_name">dimu_terkep</string>
+    <string name="app_name">Artlas</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="terkep">Térkép</string>
+    <string name="int_zm_nyvezet_k">Intézményvezetők</string>
+    <string name="az_int_zm_ny_c_me">Az intézmény címe</string>
+    <string name="le_r_s">Leírás</string>
+    <string name="fontosabb_ki_ll_t_sok">Fontosabb kiállítások</string>
+    <string name="hivatkoz_sok">Hivatkozások</string>
+    <string name="m_diatartalom">Médiatartalom</string>
 </resources>

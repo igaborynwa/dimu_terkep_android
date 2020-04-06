@@ -1,5 +1,6 @@
 package com.example.dimu_terkep
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +25,7 @@ class MapActivity : AppCompatActivity() {
     private lateinit var seekBar:SeekBar
     private lateinit var tv:TextView
 
-    private val inst =ArrayList<Institution>();
+    private val inst =ArrayList<Institution>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +55,7 @@ class MapActivity : AppCompatActivity() {
 
             override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
                tvProgress.text = seekBar.progress.toString()
+                addMarkers(seekBar.progress)
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar) {
@@ -63,25 +65,42 @@ class MapActivity : AppCompatActivity() {
             }
         })
         initList()
-        addMarkers()
+        addMarkers(2020)
     }
 
     private fun initList(){
-        inst.add(Institution("Fiatal Iparművészek Stúdiója Egyesület",47.5069605, 19.0528687, map))
-        inst.add(Institution("Ar2day Gallery",47.50866, 19.04836, map))
+        inst.add(Institution("Fiatal Iparművészek Stúdiója Egyesület","V. Kálmán Imre utca 16.",47.5069605, 19.0528687, map, 1982, 0, 1990, 2020,"Egyesület", "xy", "blabla"))
+        inst.add(Institution("Ar2day Gallery","V. Szalay utca 2. ",47.50866, 19.04836, map,2009, 0, 2009, 2018,"Kereskedelmi galéria", "xy", "blabla"))
     }
 
-    private fun addMarkers(){
-
+    private fun showDetails(marker:Marker?){
+        var tmp: Institution? = null
         for(i in inst){
-            i.getMarker().setOnMarkerClickListener(object: Marker.OnMarkerClickListener{
-                override fun onMarkerClick(marker: Marker?, mapView: MapView?): Boolean {
-                    Toast.makeText(applicationContext,i.getName(),Toast.LENGTH_SHORT).show()
-                    return true
+            if(i.getMarker() == marker){
+                tmp=i
+                break
+            }
+        }
+        if(tmp!=null) {
+            System.out.println(tmp.getName())
+            val intent = Intent(this, DetailsActivity::class.java)
+            intent.putExtra("isntitution", tmp)
+            startActivity(intent)
+        }
+
+    }
+
+    private fun addMarkers(year:Int){
+        map.overlays.clear()
+        map.invalidate()
+        for(i in inst){
+            if(i.isValid(year)) {
+                i.getMarker().setOnMarkerClickListener { marker, mapView ->
+                    showDetails(marker)
+                    true
                 }
-            })
-            map.overlays.add(i.getMarker())
-            System.out.println(i.getMarker().position.latitude.toString() + " " +i.getMarker().position.longitude.toString())
+                map.overlays.add(i.getMarker())
+            }
         }
 
 
