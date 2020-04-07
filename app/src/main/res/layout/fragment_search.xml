@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:orientation="vertical">
+
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/editText" android:hint="Keresési érték"/>
+    <TextView
+            android:text="Keresési kategória"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/textView"/>
+    <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:orientation="vertical">
+        <RadioButton
+                android:text="Intézménynév"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/radioButton3" android:layout_weight="1"/>
+        <RadioButton
+                android:text="Cím"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/radioButton2" android:layout_weight="1"/>
+        <RadioButton
+                android:text="Intézményvezető"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/radioButton" android:layout_weight="1"/>
+    </RadioGroup>
+    <TextView
+            android:text="Szűrők"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/textView2"/>
+    <CheckBox
+            android:text="Állami múzeum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/checkBox"/>
+    <CheckBox
+            android:text="Állami kultúrális központ"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/checkBox2"/>
+    <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/checkBox3" android:text="Önkormányzati múzeum"/>
+</LinearLayout>

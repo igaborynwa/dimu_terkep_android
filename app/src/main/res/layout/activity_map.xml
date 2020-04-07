@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".MapActivity">
 
 
     <include layout="@layout/content_map" android:id="@+id/include"/>
@@ -17,6 +17,6 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             app:srcCompat="@android:drawable/ic_search_category_default" app:layout_anchorGravity="end|center"
-            app:layout_anchor="@+id/include" app:backgroundTint="#00FF00"/>
+            app:layout_anchor="@+id/include" app:backgroundTint="#FFFFFF" />
 
 </android.support.design.widget.CoordinatorLayout>

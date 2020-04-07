@@ -14,6 +14,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import com.example.dimu_terkep.data.Institution
+import com.example.dimu_terkep.fragments.SearchDialogFragment
 import kotlinx.android.synthetic.main.content_map.*
 import org.osmdroid.config.Configuration
 import org.osmdroid.views.overlay.Marker
@@ -32,8 +33,8 @@ class MapActivity : AppCompatActivity() {
         setContentView(R.layout.activity_map)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            val searchFragment = SearchDialogFragment()
+            searchFragment.show(supportFragmentManager, "TAG")
         }
         val ctx = applicationContext
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx))
