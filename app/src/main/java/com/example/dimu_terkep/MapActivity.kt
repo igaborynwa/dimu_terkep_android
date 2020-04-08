@@ -10,6 +10,7 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import android.preference.PreferenceManager
+import android.support.v4.content.ContextCompat.startActivity
 import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
@@ -21,7 +22,9 @@ import org.osmdroid.views.overlay.Marker
 import java.util.*
 
 
-class MapActivity : AppCompatActivity() {
+class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
+
+
     private lateinit var map: MapView
     private lateinit var seekBar:SeekBar
     private lateinit var tv:TextView
@@ -91,6 +94,13 @@ class MapActivity : AppCompatActivity() {
 
     }
 
+    private fun refreshMarkers(param:String, value: String){
+        map.overlays.clear()
+        map.invalidate()
+        Toast.makeText(applicationContext,param+" "+value, Toast.LENGTH_LONG).show()
+    }
+
+
     private fun addMarkers(year:Int){
         map.overlays.clear()
         map.invalidate()
@@ -103,9 +113,6 @@ class MapActivity : AppCompatActivity() {
                 map.overlays.add(i.getMarker())
             }
         }
-
-
-
     }
 
     override fun onResume() {
@@ -116,5 +123,10 @@ class MapActivity : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         map.onPause()
+    }
+
+
+    override fun searchParamChanged(param:String, value: String) {
+        refreshMarkers(param, value)
     }
 }

@@ -3,45 +3,95 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent" android:orientation="vertical">
 
-    <EditText
+    <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/editText" android:hint="Keresési érték"/>
-    <TextView
-            android:text="Keresési kategória"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView"/>
-    <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:orientation="vertical">
-        <RadioButton
-                android:text="Intézménynév"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/radioButton3" android:layout_weight="1"/>
-        <RadioButton
-                android:text="Cím"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" android:id="@+id/radioButton2" android:layout_weight="1"/>
-        <RadioButton
-                android:text="Intézményvezető"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/radioButton" android:layout_weight="1"/>
-    </RadioGroup>
-    <TextView
-            android:text="Szűrők"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView2"/>
-    <CheckBox
-            android:text="Állami múzeum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/checkBox"/>
-    <CheckBox
-            android:text="Állami kultúrális központ"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/checkBox2"/>
-    <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/checkBox3" android:text="Önkormányzati múzeum"/>
+            android:layout_height="match_parent">
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/et_search" android:hint="Keresési érték"/>
+            <TextView
+                    android:text="Keresési kategória"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView" android:textStyle="bold"/>
+            <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:orientation="vertical"
+                    android:id="@+id/rg_SearchParam">
+                <RadioButton
+                        android:text="Intézménynév"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/radioButton3" android:layout_weight="1"/>
+                <RadioButton
+                        android:text="Cím"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/radioButton2" android:layout_weight="1"/>
+                <RadioButton
+                        android:text="Intézményvezető"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/radioButton" android:layout_weight="1"/>
+
+            </RadioGroup>
+            <TextView
+                    android:text="Szűrők"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView2" android:textStyle="bold"/>
+            <CheckBox
+                    android:text="Állami múzeum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/cb_allmuz" android:checked="true"/>
+            <CheckBox
+                    android:text="Állami kultúrális központ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/cb_allkulkoz" android:checked="true"/>
+            <CheckBox
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/cb_onkmuz"
+                    android:text="Önkormányzati múzeum"
+                    android:checked="true"/>
+            <CheckBox
+                    android:text="Önkormányzati kultúrális központ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/cb_onkkulkozp" android:checked="true"/>
+            <CheckBox
+                    android:text="Önkormányzati galéria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/cb_onkgal" android:checked="true"/>
+            <CheckBox
+                    android:text="Kereskedelmi galéria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/cb_kergal" android:checked="true"/>
+            <CheckBox
+                    android:text="Független kultúrális intézmény"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/cb_fugkulint" android:checked="true"/>
+            <CheckBox
+                    android:text="Non-profit galéria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/cb_nonpgal" android:checked="true"/>
+            <CheckBox
+                    android:text="Kulrúrális intézet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/cb_kultint" android:checked="true"/>
+            <CheckBox
+                    android:text="Egyesület"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/cb_egyes" android:checked="true"/>
+            <CheckBox
+                    android:text="Oktatási intézmény"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/cb_oktint" android:checked="true"/>
+            <CheckBox
+                    android:text="Étterem, kocsma, galéria"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/cb_ettkocsgal" android:checked="true"/>
+
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
