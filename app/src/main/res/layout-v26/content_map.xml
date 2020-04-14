@@ -16,7 +16,7 @@
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintVertical_bias="0.0" android:layout_marginBottom="32dp"/>
-    <SeekBar
+    <com.ianpinto.androidrangeseekbar.rangeseekbar.RangeSeekBar
             android:id="@+id/simpleSeekBar"
             android:layout_width="fill_parent"
             android:layout_height="30dp" app:layout_constraintBottom_toBottomOf="parent"
@@ -25,7 +25,7 @@
             android:min="1700" android:layout_marginBottom="32dp"
             android:background="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginRight="8dp" android:layout_marginEnd="8dp"
-            android:progressDrawable="@color/colorAccent" android:thumb="@android:drawable/btn_default"
+            android:thumb="@android:drawable/btn_default"
             app:layout_constraintHorizontal_bias="0.0"/>
     <TextView
             android:layout_width="wrap_content"

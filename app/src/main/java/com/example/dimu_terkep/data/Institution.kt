@@ -59,8 +59,20 @@ class Institution : Serializable{
         return name
     }
 
-    fun isValid(year:Int): Boolean{
-        return year in opened..closed
+    fun isValid(year1:Int , year2:Int ): Boolean{
+        return !(opened>year2||closed<year1)
+    }
+
+    fun search(param:String, value:String ): Boolean{
+        return when(param){
+            "Intézménynév" -> name.toLowerCase().contains(value.toLowerCase())
+            "Cím" -> address.toLowerCase().contains(value.toLowerCase())
+            "Intézményvezető" -> head.toLowerCase().contains(value.toLowerCase())
+            else -> {
+                false
+            }
+
+        }
     }
 
 

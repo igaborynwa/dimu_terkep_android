@@ -53,7 +53,6 @@ class SearchDialogFragment : DialogFragment() {
         builder.setTitle("Keresés")
         builder.setPositiveButton("Keresés", DialogInterface.OnClickListener { dialogInterface, i ->
             val rb = viewAct.findViewById(rg.checkedRadioButtonId) as RadioButton
-            Toast.makeText(activity?.applicationContext,"dffasfaf",Toast.LENGTH_LONG).show()
             listener.searchParamChanged(rb.text.toString(),etSearch.text.toString())
         })
         builder.setNegativeButton("Cancel", null)

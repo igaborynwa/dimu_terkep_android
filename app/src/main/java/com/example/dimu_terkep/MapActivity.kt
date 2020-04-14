@@ -16,6 +16,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.dimu_terkep.data.Institution
 import com.example.dimu_terkep.fragments.SearchDialogFragment
+import com.ianpinto.androidrangeseekbar.rangeseekbar.RangeSeekBar
 import kotlinx.android.synthetic.main.content_map.*
 import org.osmdroid.config.Configuration
 import org.osmdroid.views.overlay.Marker
@@ -26,8 +27,11 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
 
 
     private lateinit var map: MapView
-    private lateinit var seekBar:SeekBar
+    private lateinit var seekBar: RangeSeekBar<Int>
     private lateinit var tv:TextView
+    private lateinit var searchParam:String
+    private lateinit var searchValue: String
+
 
     private val inst =ArrayList<Institution>()
 
@@ -51,30 +55,27 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         mapController.setCenter(startPoint)
         seekBar=findViewById(R.id.simpleSeekBar)
         tv=findViewById(R.id.tvProgress)
-        seekBar.max=Calendar.getInstance().get(Calendar.YEAR)
-        seekBar.progress=Calendar.getInstance().get(Calendar.YEAR)
-        tv.text=seekBar.progress.toString()
+        seekBar.setRangeValues(1700,Calendar.getInstance().get(Calendar.YEAR))
+        seekBar.selectedMaxValue=Calendar.getInstance().get(Calendar.YEAR)
+        seekBar.selectedMinValue=1700
+        tv.text=seekBar.selectedMinValue.toString()+" - " + seekBar.selectedMaxValue.toString()
 
-        seekBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
 
-            override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
-               tvProgress.text = seekBar.progress.toString()
-                addMarkers(seekBar.progress)
+        seekBar.setOnRangeSeekBarChangeListener(object : RangeSeekBar.OnRangeSeekBarChangeListener<Int>{
+            override fun onRangeSeekBarValuesChanged(bar: RangeSeekBar<*>?, minValue: Int?, maxValue: Int?) {
+                tv.text=seekBar.selectedMinValue.toString()+" - " + seekBar.selectedMaxValue.toString()
+                refreshMarkers()
             }
+        }
+        )
 
-            override fun onStartTrackingTouch(seekBar: SeekBar) {
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar) {
-            }
-        })
         initList()
-        addMarkers(2020)
+        addMarkers()
     }
 
     private fun initList(){
         inst.add(Institution("Fiatal Iparművészek Stúdiója Egyesület","V. Kálmán Imre utca 16.",47.5069605, 19.0528687, map, 1982, 0, 1990, 2020,"Egyesület", "xy", "blabla"))
-        inst.add(Institution("Ar2day Gallery","V. Szalay utca 2. ",47.50866, 19.04836, map,2009, 0, 2009, 2018,"Kereskedelmi galéria", "xy", "blabla"))
+        inst.add(Institution("Ar2day Gallery","V. Szalay utca 2. ",47.50866, 19.04836, map,2000, 0, 2000, 2009,"Kereskedelmi galéria", "xy", "blabla"))
     }
 
     private fun showDetails(marker:Marker?){
@@ -94,18 +95,27 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
 
     }
 
-    private fun refreshMarkers(param:String, value: String){
-        map.overlays.clear()
-        map.invalidate()
-        Toast.makeText(applicationContext,param+" "+value, Toast.LENGTH_LONG).show()
-    }
-
-
-    private fun addMarkers(year:Int){
+    private fun refreshMarkers(){
         map.overlays.clear()
         map.invalidate()
         for(i in inst){
-            if(i.isValid(year)) {
+            if(i.isValid(seekBar.selectedMinValue, seekBar.selectedMaxValue) && i.search(searchParam, searchValue)) {
+                i.getMarker().setOnMarkerClickListener { marker, mapView ->
+                    showDetails(marker)
+                    true
+                }
+                map.overlays.add(i.getMarker())
+            }
+        }
+    }
+
+
+
+    private fun addMarkers(){
+        map.overlays.clear()
+        map.invalidate()
+        for(i in inst){
+            if(i.isValid(seekBar.selectedMinValue, seekBar.selectedMaxValue)) {
                 i.getMarker().setOnMarkerClickListener { marker, mapView ->
                     showDetails(marker)
                     true
@@ -127,6 +137,9 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
 
 
     override fun searchParamChanged(param:String, value: String) {
-        refreshMarkers(param, value)
+        searchParam=param
+        searchValue=value
+        refreshMarkers()
     }
 }
+
