@@ -21,6 +21,7 @@ import kotlinx.android.synthetic.main.content_map.*
 import org.osmdroid.config.Configuration
 import org.osmdroid.views.overlay.Marker
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
@@ -29,8 +30,9 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
     private lateinit var map: MapView
     private lateinit var seekBar: RangeSeekBar<Int>
     private lateinit var tv:TextView
-    private lateinit var searchParam:String
-    private lateinit var searchValue: String
+    private  var searchParam=""
+    private  var searchValue=""
+    private var typeList= ArrayList<String>()
 
 
     private val inst =ArrayList<Institution>()
@@ -74,8 +76,24 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
     }
 
     private fun initList(){
+        typeList.add(getString(R.string.type1).toLowerCase())
+        typeList.add(getString(R.string.type2).toLowerCase())
+        typeList.add(getString(R.string.type3).toLowerCase())
+        typeList.add(getString(R.string.type4).toLowerCase())
+        typeList.add(getString(R.string.type5).toLowerCase())
+        typeList.add(getString(R.string.type6).toLowerCase())
+        typeList.add(getString(R.string.type7).toLowerCase())
+        typeList.add(getString(R.string.type8).toLowerCase())
+        typeList.add(getString(R.string.type9).toLowerCase())
+        typeList.add(getString(R.string.type10).toLowerCase())
+        typeList.add(getString(R.string.type11).toLowerCase())
+        typeList.add(getString(R.string.type12).toLowerCase())
+
+
+
         inst.add(Institution("Fiatal Iparművészek Stúdiója Egyesület","V. Kálmán Imre utca 16.",47.5069605, 19.0528687, map, 1982, 0, 1990, 2020,"Egyesület", "xy", "blabla"))
         inst.add(Institution("Ar2day Gallery","V. Szalay utca 2. ",47.50866, 19.04836, map,2000, 0, 2000, 2009,"Kereskedelmi galéria", "xy", "blabla"))
+
     }
 
     private fun showDetails(marker:Marker?){
@@ -99,7 +117,9 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         map.overlays.clear()
         map.invalidate()
         for(i in inst){
-            if(i.isValid(seekBar.selectedMinValue, seekBar.selectedMaxValue) && i.search(searchParam, searchValue)) {
+            if(i.isValid(seekBar.selectedMinValue, seekBar.selectedMaxValue)
+                && i.search(searchParam, searchValue)
+                && typeList.contains(i.getType().toLowerCase())) {
                 i.getMarker().setOnMarkerClickListener { marker, mapView ->
                     showDetails(marker)
                     true
@@ -136,9 +156,10 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
     }
 
 
-    override fun searchParamChanged(param:String, value: String) {
+    override fun searchParamChanged(param:String, value: String, list:ArrayList<String>) {
         searchParam=param
         searchValue=value
+        typeList=list
         refreshMarkers()
     }
 }

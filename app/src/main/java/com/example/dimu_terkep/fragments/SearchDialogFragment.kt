@@ -21,9 +21,9 @@ class SearchDialogFragment : DialogFragment() {
 
     private lateinit var etSearch:EditText
     private lateinit var viewAct: View
-
+    private var listOfSelectedTypes= ArrayList<String>()
     interface SearchListener{
-        fun searchParamChanged(param:String, value: String)
+        fun searchParamChanged(param:String, value: String, list:ArrayList<String>)
 
     }
 
@@ -53,7 +53,8 @@ class SearchDialogFragment : DialogFragment() {
         builder.setTitle("Keresés")
         builder.setPositiveButton("Keresés", DialogInterface.OnClickListener { dialogInterface, i ->
             val rb = viewAct.findViewById(rg.checkedRadioButtonId) as RadioButton
-            listener.searchParamChanged(rb.text.toString(),etSearch.text.toString())
+            makeList()
+            listener.searchParamChanged(rb.text.toString(),etSearch.text.toString(), listOfSelectedTypes)
         })
         builder.setNegativeButton("Cancel", null)
         return builder.create()
@@ -64,5 +65,21 @@ class SearchDialogFragment : DialogFragment() {
         rg=viewAct.findViewById(R.id.rg_SearchParam)
         etSearch=viewAct.findViewById(R.id.et_search)
         return viewAct
+    }
+
+    private fun makeList(){
+        if(viewAct.findViewById<CheckBox>(R.id.cb_allmuz).isChecked) listOfSelectedTypes.add(viewAct.findViewById<CheckBox>(R.id.cb_allmuz).text.toString().toLowerCase())
+        if(viewAct.findViewById<CheckBox>(R.id.cb_allkulkoz).isChecked) listOfSelectedTypes.add(viewAct.findViewById<CheckBox>(R.id.cb_allkulkoz).text.toString().toLowerCase())
+        if(viewAct.findViewById<CheckBox>(R.id.cb_onkmuz).isChecked) listOfSelectedTypes.add(viewAct.findViewById<CheckBox>(R.id.cb_onkmuz).text.toString().toLowerCase())
+        if(viewAct.findViewById<CheckBox>(R.id.cb_onkkulkozp).isChecked) listOfSelectedTypes.add(viewAct.findViewById<CheckBox>(R.id.cb_onkkulkozp).text.toString().toLowerCase())
+        if(viewAct.findViewById<CheckBox>(R.id.cb_onkgal).isChecked) listOfSelectedTypes.add(viewAct.findViewById<CheckBox>(R.id.cb_onkgal).text.toString().toLowerCase())
+        if(viewAct.findViewById<CheckBox>(R.id.cb_kergal).isChecked) listOfSelectedTypes.add(viewAct.findViewById<CheckBox>(R.id.cb_kergal).text.toString().toLowerCase())
+        if(viewAct.findViewById<CheckBox>(R.id.cb_fugkulint).isChecked) listOfSelectedTypes.add(viewAct.findViewById<CheckBox>(R.id.cb_fugkulint).text.toString().toLowerCase())
+        if(viewAct.findViewById<CheckBox>(R.id.cb_nonpgal).isChecked) listOfSelectedTypes.add(viewAct.findViewById<CheckBox>(R.id.cb_nonpgal).text.toString().toLowerCase())
+        if(viewAct.findViewById<CheckBox>(R.id.cb_kultint).isChecked) listOfSelectedTypes.add(viewAct.findViewById<CheckBox>(R.id.cb_kultint).text.toString().toLowerCase())
+        if(viewAct.findViewById<CheckBox>(R.id.cb_egyes).isChecked) listOfSelectedTypes.add(viewAct.findViewById<CheckBox>(R.id.cb_egyes).text.toString().toLowerCase())
+        if(viewAct.findViewById<CheckBox>(R.id.cb_oktint).isChecked) listOfSelectedTypes.add(viewAct.findViewById<CheckBox>(R.id.cb_oktint).text.toString().toLowerCase())
+        if(viewAct.findViewById<CheckBox>(R.id.cb_ettkocsgal).isChecked) listOfSelectedTypes.add(viewAct.findViewById<CheckBox>(R.id.cb_ettkocsgal).text.toString().toLowerCase())
+
     }
 }

@@ -26,7 +26,8 @@
                 <RadioButton
                         android:text="Intézménynév"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/radioButton3" android:layout_weight="1"/>
+                        android:layout_height="wrap_content" android:id="@+id/radioButton3" android:layout_weight="1"
+                        android:checked="true"/>
                 <RadioButton
                         android:text="Cím"
                         android:layout_width="match_parent"
@@ -42,52 +43,52 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/textView2" android:textStyle="bold"/>
             <CheckBox
-                    android:text="Állami múzeum"
+                    android:text="@string/type1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/cb_allmuz" android:checked="true"/>
             <CheckBox
-                    android:text="Állami kultúrális központ"
+                    android:text="@string/type2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/cb_allkulkoz" android:checked="true"/>
             <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/cb_onkmuz"
-                    android:text="Önkormányzati múzeum"
+                    android:text="@string/type3"
                     android:checked="true"/>
             <CheckBox
-                    android:text="Önkormányzati kultúrális központ"
+                    android:text="@string/type4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/cb_onkkulkozp" android:checked="true"/>
             <CheckBox
-                    android:text="Önkormányzati galéria"
+                    android:text="@string/type5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/cb_onkgal" android:checked="true"/>
             <CheckBox
-                    android:text="Kereskedelmi galéria"
+                    android:text="@string/type6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/cb_kergal" android:checked="true"/>
             <CheckBox
-                    android:text="Független kultúrális intézmény"
+                    android:text="@string/type7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/cb_fugkulint" android:checked="true"/>
             <CheckBox
-                    android:text="Non-profit galéria"
+                    android:text="@string/type8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/cb_nonpgal" android:checked="true"/>
             <CheckBox
-                    android:text="Kulrúrális intézet"
+                    android:text="@string/type9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/cb_kultint" android:checked="true"/>
             <CheckBox
-                    android:text="Egyesület"
+                    android:text="@string/type10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/cb_egyes" android:checked="true"/>
             <CheckBox
-                    android:text="Oktatási intézmény"
+                    android:text="@string/type11"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/cb_oktint" android:checked="true"/>
             <CheckBox
-                    android:text="Étterem, kocsma, galéria"
+                    android:text="@string/type12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/cb_ettkocsgal" android:checked="true"/>
 

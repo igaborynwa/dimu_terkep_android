@@ -9,4 +9,16 @@
     <string name="fontosabb_ki_ll_t_sok">Fontosabb kiállítások</string>
     <string name="hivatkoz_sok">Hivatkozások</string>
     <string name="m_diatartalom">Médiatartalom</string>
+    <string name="type1">Állami múzeum</string>
+    <string name="type2">Állami kultúrális központ</string>
+    <string name="type3">Önkormányzati múzeum</string>
+    <string name="type4">Önkormányzati kultúrális központ</string>
+    <string name="type5">Önkormányzati galéria</string>
+    <string name="type6">Kereskedelmi galéria</string>
+    <string name="type7">Független kultúrális intézmény</string>
+    <string name="type8">Non-profit galéria</string>
+    <string name="type9">Kulrúrális intézet</string>
+    <string name="type10">Egyesület</string>
+    <string name="type11">Oktatási intézmény</string>
+    <string name="type12">Étterem, kocsma, galéria</string>
 </resources>
