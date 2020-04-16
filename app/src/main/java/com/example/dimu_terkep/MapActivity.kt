@@ -75,6 +75,8 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         addMarkers()
     }
 
+
+
     private fun initList(){
         typeList.add(getString(R.string.type1).toLowerCase())
         typeList.add(getString(R.string.type2).toLowerCase())
@@ -162,5 +164,18 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         typeList=list
         refreshMarkers()
     }
+
+    override fun getSearchValue(): String {
+        return searchValue
+    }
+
+    override fun getSearchParam(): String {
+        return searchParam
+    }
+
+    override fun getList():ArrayList<String>{
+        return typeList
+    }
+
 }
 
