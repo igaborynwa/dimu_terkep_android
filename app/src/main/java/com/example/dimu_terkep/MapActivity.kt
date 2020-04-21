@@ -16,6 +16,10 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.dimu_terkep.data.Institution
 import com.example.dimu_terkep.fragments.SearchDialogFragment
+import com.example.dimu_terkep.model.Intezmeny
+import com.example.dimu_terkep.model.IntezmenyPinDto
+import com.example.dimu_terkep.model.IntezmenyTipus
+import com.example.dimu_terkep.network.TerkepInteractor
 import com.ianpinto.androidrangeseekbar.rangeseekbar.RangeSeekBar
 import kotlinx.android.synthetic.main.content_map.*
 import org.osmdroid.config.Configuration
@@ -27,12 +31,15 @@ import kotlin.collections.ArrayList
 class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
 
 
+    private var terkepInteractor = TerkepInteractor()
     private lateinit var map: MapView
     private lateinit var seekBar: RangeSeekBar<Int>
     private lateinit var tv:TextView
-    private  var searchParam=""
-    private  var searchValue=""
+    private  var searchName=""
+    private  var searchAddr=""
+    private var searchHead=""
     private var typeList= ArrayList<String>()
+    private var markerList =ArrayList<Marker>()
 
 
     private val inst =ArrayList<Institution>()
@@ -66,15 +73,67 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         seekBar.setOnRangeSeekBarChangeListener(object : RangeSeekBar.OnRangeSeekBarChangeListener<Int>{
             override fun onRangeSeekBarValuesChanged(bar: RangeSeekBar<*>?, minValue: Int?, maxValue: Int?) {
                 tv.text=seekBar.selectedMinValue.toString()+" - " + seekBar.selectedMaxValue.toString()
-                refreshMarkers()
+                loadPins()
             }
         }
         )
 
         initList()
-        addMarkers()
+        loadPins()
     }
 
+    private fun loadPins() {
+       // terkepInteractor.getIntezmeny(searchName,searchAddr,searchHead, seekBar.selectedMinValue, seekBar.selectedMaxValue, getTypeList(),
+         //   onSuccess = this::showMarkers, onError = this::showError)
+        terkepInteractor.getIntezmenyById("sdad", onSuccess = this::requestByIdSuccess, onError = this::requestByIdError )
+    }
+
+    private fun requestByIdSuccess(i: Intezmeny){
+        Toast.makeText(applicationContext, "success", Toast.LENGTH_LONG).show()
+    }
+
+    private fun requestByIdError(e:Throwable){
+        Toast.makeText(applicationContext, "rossz", Toast.LENGTH_LONG).show()
+        e.printStackTrace()
+    }
+
+    private fun showMarkers(intezmenyek:List<IntezmenyPinDto>){
+        map.overlays.clear()
+        map.invalidate()
+        for(m in markerList) markerList.remove(m)
+        for(i in intezmenyek){
+            val marker = Marker(map)
+            marker.position= GeoPoint(i.latitude, i.longitude)
+            map.overlays.add(marker)
+            markerList.add(marker)
+
+        }
+    }
+    private fun showError(e: Throwable) {
+        e.printStackTrace()
+    }
+
+    private fun getTypeList() :List<IntezmenyTipus>{
+        val retList= ArrayList<IntezmenyTipus>()
+        for(s in typeList){
+            when(s){
+                getString(R.string.type1) ->retList.add(IntezmenyTipus.AllamiMuzeum)
+                getString(R.string.type2) ->retList.add(IntezmenyTipus.AllamiKuturalis)
+                getString(R.string.type3) ->retList.add(IntezmenyTipus.OnkormanyzatiMuzeum)
+                getString(R.string.type4) ->retList.add(IntezmenyTipus.OnkormanyzatiKulturalis)
+                getString(R.string.type5) ->retList.add(IntezmenyTipus.OnkormanyzatiGaleria)
+                getString(R.string.type6) ->retList.add(IntezmenyTipus.KereskedelmGaleria)
+                getString(R.string.type7) ->retList.add(IntezmenyTipus.FuggetlenKulturalisIntezmeny)
+                getString(R.string.type8) ->retList.add(IntezmenyTipus.NonProfitGaleria)
+                getString(R.string.type9) ->retList.add(IntezmenyTipus.KulturalisIntezet)
+                getString(R.string.type10) ->retList.add(IntezmenyTipus.Egyesulet)
+                getString(R.string.type11) ->retList.add(IntezmenyTipus.Oktatasi)
+                getString(R.string.type12) ->retList.add(IntezmenyTipus.EtteremKocsmaGaleria)
+            }
+        }
+
+        return retList
+    }
 
 
     private fun initList(){
@@ -115,24 +174,6 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
 
     }
 
-    private fun refreshMarkers(){
-        map.overlays.clear()
-        map.invalidate()
-        for(i in inst){
-            if(i.isValid(seekBar.selectedMinValue, seekBar.selectedMaxValue)
-                && i.search(searchParam, searchValue)
-                && typeList.contains(i.getType().toLowerCase())) {
-                i.getMarker().setOnMarkerClickListener { marker, mapView ->
-                    showDetails(marker)
-                    true
-                }
-                map.overlays.add(i.getMarker())
-            }
-        }
-    }
-
-
-
     private fun addMarkers(){
         map.overlays.clear()
         map.invalidate()
@@ -158,20 +199,27 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
     }
 
 
-    override fun searchParamChanged(param:String, value: String, list:ArrayList<String>) {
-        searchParam=param
-        searchValue=value
+    override fun searchParamChanged(name:String, addr:String,  head: String, list:ArrayList<String>) {
+        searchName=name
+        searchAddr=addr
+        searchHead=head
         typeList=list
-        refreshMarkers()
+        loadPins()
+
     }
 
-    override fun getSearchValue(): String {
-        return searchValue
+    override fun getSearchName(): String {
+        return searchName
     }
 
-    override fun getSearchParam(): String {
-        return searchParam
+    override fun getSearchAddr(): String {
+        return searchAddr
     }
+
+    override fun getSearchHead(): String {
+        return searchHead
+    }
+
 
     override fun getList():ArrayList<String>{
         return typeList

@@ -14,30 +14,19 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/et_search" android:hint="Keresési érték"/>
-            <TextView
-                    android:text="Keresési kategória"
+                    android:id="@+id/et_searchName" android:hint="Intézmény neve"/>
+            <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/textView" android:textStyle="bold"/>
-            <RadioGroup
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/et_searchAddr" android:hint="Intézmény címe"/>
+            <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:orientation="vertical"
-                    android:id="@+id/rg_SearchParam">
-                <RadioButton
-                        android:text="Intézménynév"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/rb_Intnev" android:layout_weight="1"
-                        android:checked="true"/>
-                <RadioButton
-                        android:text="Cím"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/rb_cim" android:layout_weight="1"/>
-                <RadioButton
-                        android:text="Intézményvezető"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:id="@+id/rb_vezeto" android:layout_weight="1"/>
-
-            </RadioGroup>
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="10"
+                    android:id="@+id/et_searchHead" android:hint="Intézményvezető"/>
             <TextView
                     android:text="Szűrők"
                     android:layout_width="match_parent"

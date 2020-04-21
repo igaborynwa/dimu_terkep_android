@@ -18,18 +18,20 @@ import kotlinx.android.synthetic.main.fragment_search.*
 class SearchDialogFragment : DialogFragment() {
 
     private lateinit var listener: SearchListener
-    private lateinit var rg:RadioGroup
 
-    private lateinit var etSearch:EditText
+    private lateinit var etSearchName:EditText
+    private lateinit var etSearchAddr:EditText
+    private lateinit var etSearchHead:EditText
     private lateinit var viewAct: View
     private var listOfSelectedTypes= ArrayList<String>()
     private var cbList=ArrayList<CheckBox>()
 
     interface SearchListener{
-        fun searchParamChanged(param:String, value: String, list:ArrayList<String>)
+        fun searchParamChanged(name:String,addr: String,  head: String, list:ArrayList<String>)
         fun getList():ArrayList<String>
-        fun getSearchParam():String
-        fun getSearchValue():String
+        fun getSearchName():String
+        fun getSearchAddr():String
+        fun getSearchHead():String
 
 
     }
@@ -59,9 +61,8 @@ class SearchDialogFragment : DialogFragment() {
         builder.setView(getContentView())
         builder.setTitle("Keresés")
         builder.setPositiveButton("Keresés", DialogInterface.OnClickListener { dialogInterface, i ->
-            val rb = viewAct.findViewById(rg.checkedRadioButtonId) as RadioButton
             checkList()
-            listener.searchParamChanged(rb.text.toString(),etSearch.text.toString(), listOfSelectedTypes)
+            listener.searchParamChanged(et_searchName.text.toString(),etSearchAddr.text.toString(),etSearchHead.text.toString(), listOfSelectedTypes)
         })
         builder.setNegativeButton("Cancel", null)
         return builder.create()
@@ -69,14 +70,15 @@ class SearchDialogFragment : DialogFragment() {
     }
     private fun getContentView(): View {
         viewAct = LayoutInflater.from(context).inflate(R.layout.fragment_search, null)
-        rg=viewAct.findViewById(R.id.rg_SearchParam)
-        etSearch=viewAct.findViewById(R.id.et_search)
-        etSearch.setText(listener.getSearchValue())
-        when(listener.getSearchParam()){
-            "Intézménynév" -> rg.check(R.id.rb_Intnev)
-            "Cím" -> rg.check(R.id.rb_cim)
-            "Intézményvezető" -> rg.check(R.id.rb_vezeto)
-        }
+
+        etSearchName=viewAct.findViewById(R.id.et_searchName)
+        etSearchName.setText(listener.getSearchName())
+        etSearchAddr=viewAct.findViewById(R.id.et_searchAddr)
+        etSearchAddr.setText(listener.getSearchAddr())
+        etSearchHead=viewAct.findViewById(R.id.et_searchHead)
+        etSearchHead.setText(listener.getSearchHead())
+
+
         makeList()
         return viewAct
     }
