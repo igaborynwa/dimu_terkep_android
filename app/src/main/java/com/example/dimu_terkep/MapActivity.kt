@@ -83,9 +83,9 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
     }
 
     private fun loadPins() {
-       // terkepInteractor.getIntezmeny(searchName,searchAddr,searchHead, seekBar.selectedMinValue, seekBar.selectedMaxValue, getTypeList(),
-         //   onSuccess = this::showMarkers, onError = this::showError)
-        terkepInteractor.getIntezmenyById("sdad", onSuccess = this::requestByIdSuccess, onError = this::requestByIdError )
+        //terkepInteractor.getIntezmeny(searchName,searchAddr,searchHead, seekBar.selectedMinValue, seekBar.selectedMaxValue, getTypeList(),
+          //  onSuccess = this::showMarkers, onError = this::showError)
+        terkepInteractor.getIntezmenyById("584dddbe-a7fd-47e3-9c06-10f6f00f33e2", onSuccess = this::requestByIdSuccess, onError = this::requestByIdError )
     }
 
     private fun requestByIdSuccess(i: Intezmeny){
@@ -98,6 +98,7 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
     }
 
     private fun showMarkers(intezmenyek:List<IntezmenyPinDto>){
+        Toast.makeText(applicationContext, "success", Toast.LENGTH_LONG).show()
         map.overlays.clear()
         map.invalidate()
         for(m in markerList) markerList.remove(m)
@@ -110,6 +111,7 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         }
     }
     private fun showError(e: Throwable) {
+        Toast.makeText(applicationContext, "error", Toast.LENGTH_LONG).show()
         e.printStackTrace()
     }
 

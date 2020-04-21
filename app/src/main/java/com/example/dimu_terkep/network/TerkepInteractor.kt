@@ -32,7 +32,6 @@ class TerkepInteractor {
         val handler = Handler()
         Thread {
             try {
-                if (!call.execute().isSuccessful ) throw NullPointerException()
                 val response = call.execute().body()!!
                 handler.post { onSuccess(response) }
 

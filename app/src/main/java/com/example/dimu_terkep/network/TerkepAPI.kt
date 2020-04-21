@@ -12,7 +12,7 @@ interface TerkepAPI {
         const val ENDPOINT_URL="https://dimu-backend.herokuapp.com/api/"
     }
 
-    @GET("Intezmeny")
+    @POST("Intezmeny")
     fun getIntezmeny(@Body param: IntezmenySearchParams): Call<List<IntezmenyPinDto>>
 
     /*@Multipart
