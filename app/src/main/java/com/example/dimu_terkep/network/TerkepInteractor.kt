@@ -32,6 +32,7 @@ class TerkepInteractor {
         val handler = Handler()
         Thread {
             try {
+               // if(!call.execute().isSuccessful) throw NullPointerException("fdsfsdfs")
                 val response = call.execute().body()!!
                 handler.post { onSuccess(response) }
 
@@ -44,7 +45,7 @@ class TerkepInteractor {
 
     fun getIntezmeny(nev:String, cim: String, vezeto:String, tol: Int, ig: Int, tipus: List<IntezmenyTipus>,
                   onSuccess: (List<IntezmenyPinDto>) -> Unit, onError: (Throwable) -> Unit){
-        val param= IntezmenySearchParams(nev, cim, vezeto, tol, ig, tipus)
+        val param= IntezmenySearchParams(nev, cim, vezeto, tol, ig, tipus.get(0).i)
 
         val getIntezmenyRequest =terkepAPI.getIntezmeny(param)
         runCallOnBackgroundThread(getIntezmenyRequest, onSuccess, onError)

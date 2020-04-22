@@ -1,5 +1,6 @@
 package com.example.dimu_terkep.fragments
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.graphics.Color
 import android.text.Editable
 import com.example.dimu_terkep.R
 import android.widget.*
+import com.example.dimu_terkep.model.IntezmenyTipus
 import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_search.*
 
@@ -23,12 +25,14 @@ class SearchDialogFragment : DialogFragment() {
     private lateinit var etSearchAddr:EditText
     private lateinit var etSearchHead:EditText
     private lateinit var viewAct: View
-    private var listOfSelectedTypes= ArrayList<String>()
+    private var listOfSelectedTypes= ArrayList<IntezmenyTipus>()
     private var cbList=ArrayList<CheckBox>()
+    private lateinit var a: Activity
+
 
     interface SearchListener{
-        fun searchParamChanged(name:String,addr: String,  head: String, list:ArrayList<String>)
-        fun getList():ArrayList<String>
+        fun searchParamChanged(name:String,addr: String,  head: String, list:ArrayList<IntezmenyTipus>)
+        fun getList():ArrayList<IntezmenyTipus>
         fun getSearchName():String
         fun getSearchAddr():String
         fun getSearchHead():String
@@ -39,6 +43,7 @@ class SearchDialogFragment : DialogFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val act=this.activity
+        a=this.activity as Activity
         if(act is SearchListener){
             listener=act
         }
@@ -62,7 +67,7 @@ class SearchDialogFragment : DialogFragment() {
         builder.setTitle("Keresés")
         builder.setPositiveButton("Keresés", DialogInterface.OnClickListener { dialogInterface, i ->
             checkList()
-            listener.searchParamChanged(et_searchName.text.toString(),etSearchAddr.text.toString(),etSearchHead.text.toString(), listOfSelectedTypes)
+            listener.searchParamChanged(etSearchName.text.toString(),etSearchAddr.text.toString(),etSearchHead.text.toString(), listOfSelectedTypes)
         })
         builder.setNegativeButton("Cancel", null)
         return builder.create()
@@ -78,14 +83,13 @@ class SearchDialogFragment : DialogFragment() {
         etSearchHead=viewAct.findViewById(R.id.et_searchHead)
         etSearchHead.setText(listener.getSearchHead())
 
-
         makeList()
         return viewAct
     }
 
     private fun checkList(){
         for(cb in cbList){
-            if(cb.isChecked) listOfSelectedTypes.add(cb.text.toString().toLowerCase())
+            if(cb.isChecked) listOfSelectedTypes.add(IntezmenyTipus.desc(cb.text.toString(), a))
         }
     }
 
@@ -105,7 +109,7 @@ class SearchDialogFragment : DialogFragment() {
 
         for(cb in cbList){
             if(listener.getList().size==0) cb.isChecked=true
-            else cb.isChecked = listener.getList().contains(cb.text.toString().toLowerCase())
+            else cb.isChecked = listener.getList().contains(IntezmenyTipus.desc(cb.text.toString(),a))
         }
 
     }

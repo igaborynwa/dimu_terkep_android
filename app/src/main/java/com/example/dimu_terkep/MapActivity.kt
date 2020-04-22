@@ -38,7 +38,7 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
     private  var searchName=""
     private  var searchAddr=""
     private var searchHead=""
-    private var typeList= ArrayList<String>()
+    private var typeList= ArrayList<IntezmenyTipus>()
     private var markerList =ArrayList<Marker>()
 
 
@@ -82,14 +82,17 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         loadPins()
     }
 
-    private fun loadPins() {
-        //terkepInteractor.getIntezmeny(searchName,searchAddr,searchHead, seekBar.selectedMinValue, seekBar.selectedMaxValue, getTypeList(),
-          //  onSuccess = this::showMarkers, onError = this::showError)
+    private fun loadDetails(){
         terkepInteractor.getIntezmenyById("584dddbe-a7fd-47e3-9c06-10f6f00f33e2", onSuccess = this::requestByIdSuccess, onError = this::requestByIdError )
     }
 
+    private fun loadPins() {
+        terkepInteractor.getIntezmeny(searchName,searchAddr,searchHead, seekBar.selectedMinValue, seekBar.selectedMaxValue, typeList,
+            onSuccess = this::showMarkers, onError = this::showError)
+    }
+
     private fun requestByIdSuccess(i: Intezmeny){
-        Toast.makeText(applicationContext, "success", Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, i.nev, Toast.LENGTH_LONG).show()
     }
 
     private fun requestByIdError(e:Throwable){
@@ -98,10 +101,10 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
     }
 
     private fun showMarkers(intezmenyek:List<IntezmenyPinDto>){
-        Toast.makeText(applicationContext, "success", Toast.LENGTH_LONG).show()
+        //Toast.makeText(applicationContext, "success", Toast.LENGTH_LONG).show()
         map.overlays.clear()
         map.invalidate()
-        for(m in markerList) markerList.remove(m)
+        //for(m in markerList) markerList.remove(m)
         for(i in intezmenyek){
             val marker = Marker(map)
             marker.position= GeoPoint(i.latitude, i.longitude)
@@ -115,42 +118,22 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         e.printStackTrace()
     }
 
-    private fun getTypeList() :List<IntezmenyTipus>{
-        val retList= ArrayList<IntezmenyTipus>()
-        for(s in typeList){
-            when(s){
-                getString(R.string.type1) ->retList.add(IntezmenyTipus.AllamiMuzeum)
-                getString(R.string.type2) ->retList.add(IntezmenyTipus.AllamiKuturalis)
-                getString(R.string.type3) ->retList.add(IntezmenyTipus.OnkormanyzatiMuzeum)
-                getString(R.string.type4) ->retList.add(IntezmenyTipus.OnkormanyzatiKulturalis)
-                getString(R.string.type5) ->retList.add(IntezmenyTipus.OnkormanyzatiGaleria)
-                getString(R.string.type6) ->retList.add(IntezmenyTipus.KereskedelmGaleria)
-                getString(R.string.type7) ->retList.add(IntezmenyTipus.FuggetlenKulturalisIntezmeny)
-                getString(R.string.type8) ->retList.add(IntezmenyTipus.NonProfitGaleria)
-                getString(R.string.type9) ->retList.add(IntezmenyTipus.KulturalisIntezet)
-                getString(R.string.type10) ->retList.add(IntezmenyTipus.Egyesulet)
-                getString(R.string.type11) ->retList.add(IntezmenyTipus.Oktatasi)
-                getString(R.string.type12) ->retList.add(IntezmenyTipus.EtteremKocsmaGaleria)
-            }
-        }
 
-        return retList
-    }
 
 
     private fun initList(){
-        typeList.add(getString(R.string.type1).toLowerCase())
-        typeList.add(getString(R.string.type2).toLowerCase())
-        typeList.add(getString(R.string.type3).toLowerCase())
-        typeList.add(getString(R.string.type4).toLowerCase())
-        typeList.add(getString(R.string.type5).toLowerCase())
-        typeList.add(getString(R.string.type6).toLowerCase())
-        typeList.add(getString(R.string.type7).toLowerCase())
-        typeList.add(getString(R.string.type8).toLowerCase())
-        typeList.add(getString(R.string.type9).toLowerCase())
-        typeList.add(getString(R.string.type10).toLowerCase())
-        typeList.add(getString(R.string.type11).toLowerCase())
-        typeList.add(getString(R.string.type12).toLowerCase())
+        typeList.add(IntezmenyTipus.desc(getString(R.string.type1),this))
+        typeList.add(IntezmenyTipus.desc(getString(R.string.type2),this))
+        typeList.add(IntezmenyTipus.desc(getString(R.string.type3),this))
+        typeList.add(IntezmenyTipus.desc(getString(R.string.type4),this))
+        typeList.add(IntezmenyTipus.desc(getString(R.string.type5),this))
+        typeList.add(IntezmenyTipus.desc(getString(R.string.type6),this))
+        typeList.add(IntezmenyTipus.desc(getString(R.string.type7),this))
+        typeList.add(IntezmenyTipus.desc(getString(R.string.type8),this))
+        typeList.add(IntezmenyTipus.desc(getString(R.string.type9),this))
+        typeList.add(IntezmenyTipus.desc(getString(R.string.type10),this))
+        typeList.add(IntezmenyTipus.desc(getString(R.string.type11),this))
+        typeList.add(IntezmenyTipus.desc(getString(R.string.type12),this))
 
 
 
@@ -201,7 +184,7 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
     }
 
 
-    override fun searchParamChanged(name:String, addr:String,  head: String, list:ArrayList<String>) {
+    override fun searchParamChanged(name:String, addr:String,  head: String, list:ArrayList<IntezmenyTipus>) {
         searchName=name
         searchAddr=addr
         searchHead=head
@@ -223,7 +206,7 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
     }
 
 
-    override fun getList():ArrayList<String>{
+    override fun getList():ArrayList<IntezmenyTipus>{
         return typeList
     }
 
