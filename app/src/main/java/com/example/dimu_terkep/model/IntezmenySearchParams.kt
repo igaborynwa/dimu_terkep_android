@@ -16,5 +16,5 @@ data class IntezmenySearchParams (
     /*@SerializedName("intezmenyTipus")
     val tipus: List<IntezmenyTipus>*/
     @SerializedName("intezmenyTipus")
-    val tiipus:Int
+    val tiipus:List<Int>
 )

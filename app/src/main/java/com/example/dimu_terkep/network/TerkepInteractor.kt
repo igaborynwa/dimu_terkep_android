@@ -45,7 +45,11 @@ class TerkepInteractor {
 
     fun getIntezmeny(nev:String, cim: String, vezeto:String, tol: Int, ig: Int, tipus: List<IntezmenyTipus>,
                   onSuccess: (List<IntezmenyPinDto>) -> Unit, onError: (Throwable) -> Unit){
-        val param= IntezmenySearchParams(nev, cim, vezeto, tol, ig, tipus.get(0).i)
+        var listOfTypes=ArrayList<Int>()
+        for(t in tipus){
+            listOfTypes.add(t.i)
+        }
+        val param= IntezmenySearchParams(nev, cim, vezeto, tol, ig, listOfTypes)
 
         val getIntezmenyRequest =terkepAPI.getIntezmeny(param)
         runCallOnBackgroundThread(getIntezmenyRequest, onSuccess, onError)

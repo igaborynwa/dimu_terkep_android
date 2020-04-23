@@ -1,6 +1,7 @@
 package com.example.dimu_terkep
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
@@ -82,23 +83,13 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         loadPins()
     }
 
-    private fun loadDetails(){
-        terkepInteractor.getIntezmenyById("584dddbe-a7fd-47e3-9c06-10f6f00f33e2", onSuccess = this::requestByIdSuccess, onError = this::requestByIdError )
-    }
 
     private fun loadPins() {
         terkepInteractor.getIntezmeny(searchName,searchAddr,searchHead, seekBar.selectedMinValue, seekBar.selectedMaxValue, typeList,
             onSuccess = this::showMarkers, onError = this::showError)
     }
 
-    private fun requestByIdSuccess(i: Intezmeny){
-        Toast.makeText(applicationContext, i.nev, Toast.LENGTH_LONG).show()
-    }
 
-    private fun requestByIdError(e:Throwable){
-        Toast.makeText(applicationContext, "rossz", Toast.LENGTH_LONG).show()
-        e.printStackTrace()
-    }
 
     private fun showMarkers(intezmenyek:List<IntezmenyPinDto>){
         //Toast.makeText(applicationContext, "success", Toast.LENGTH_LONG).show()
@@ -108,6 +99,13 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         for(i in intezmenyek){
             val marker = Marker(map)
             marker.position= GeoPoint(i.latitude, i.longitude)
+            marker.textLabelBackgroundColor= Color.RED
+            marker.textLabelForegroundColor=Color.RED
+
+            marker.setOnMarkerClickListener { m, mapView ->
+                showDetails(i)
+                true
+            }
             map.overlays.add(marker)
             markerList.add(marker)
 
@@ -134,28 +132,13 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         typeList.add(IntezmenyTipus.desc(getString(R.string.type10),this))
         typeList.add(IntezmenyTipus.desc(getString(R.string.type11),this))
         typeList.add(IntezmenyTipus.desc(getString(R.string.type12),this))
-
-
-
-        inst.add(Institution("Fiatal Iparművészek Stúdiója Egyesület","V. Kálmán Imre utca 16.",47.5069605, 19.0528687, map, 1982, 0, 1990, 2020,"Egyesület", "xy", "blabla"))
-        inst.add(Institution("Ar2day Gallery","V. Szalay utca 2. ",47.50866, 19.04836, map,2000, 0, 2000, 2009,"Kereskedelmi galéria", "xy", "blabla"))
-
     }
 
-    private fun showDetails(marker:Marker?){
-        var tmp: Institution? = null
-        for(i in inst){
-            if(i.getMarker() == marker){
-                tmp=i
-                break
-            }
-        }
-        if(tmp!=null) {
-            System.out.println(tmp.getName())
+    private fun showDetails(intezmeny: IntezmenyPinDto){
             val intent = Intent(this, DetailsActivity::class.java)
-            intent.putExtra("isntitution", tmp)
+            intent.putExtra("intezmenyId", intezmeny.id)
             startActivity(intent)
-        }
+
 
     }
 
@@ -165,7 +148,7 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         for(i in inst){
             if(i.isValid(seekBar.selectedMinValue, seekBar.selectedMaxValue)) {
                 i.getMarker().setOnMarkerClickListener { marker, mapView ->
-                    showDetails(marker)
+                    //showDetails(marker)
                     true
                 }
                 map.overlays.add(i.getMarker())
