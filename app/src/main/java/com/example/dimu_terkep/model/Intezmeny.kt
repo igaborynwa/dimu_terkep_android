@@ -12,15 +12,15 @@ data class Intezmeny (
     @SerializedName("megszunes")
     val megszunes: Int,
     @SerializedName("intezmenyHelyszinek")
-    val intezmenyHelyszinek: List<String>,
+    val intezmenyHelyszinek: List<IntezmenyHelyszin>,
     @SerializedName("tipus")
     val tipus: IntezmenyTipus,
     @SerializedName("intezmenyVezetok")
-    val intezmenyVezetok: List<String>,
+    val intezmenyVezetok: List<IntezmenyVezeto>,
     @SerializedName("leiras")
     val leiras: String,
     @SerializedName("esemenyek")
-    val esemenyek: List<String>,
+    val esemenyek: List<Esemeny>,
     @SerializedName("fotok")
     val fotok: String,
     @SerializedName("videok")

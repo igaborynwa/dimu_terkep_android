@@ -20,10 +20,6 @@ class DetailsActivity : AppCompatActivity() {
 
         val id = intent.getSerializableExtra("intezmenyId") as String
         loadDetails(id)
-
-
-
-
     }
 
     private fun loadDetails(id:String){
@@ -34,8 +30,25 @@ class DetailsActivity : AppCompatActivity() {
         intezmeny=i
         title = i.nev
         var cim =""
-        for(s in i.intezmenyHelyszinek) cim+=s+"\n"
+        for(s in i.intezmenyHelyszinek) {
+            var kolt =""
+            if(s.koltozes!=0) kolt=s.koltozes.toString()
+            cim+=s.helyszin+" ("+s.nyitas.toString()+" - "+ kolt + ")\n"
+        }
         tv_addr.text=cim
+        var vezetok =""
+        for(s in i.intezmenyVezetok) {
+            var ig=""
+            if(s.ig!=0) ig=s.ig.toString()
+            vezetok+=s.nev+" ("+ s.tol.toString()+" -  "+ig +")\n"
+        }
+        tv_head.text=vezetok
+        tv_desc.text=i.leiras
+        tv_links.text=i.link
+        tv_media.text=i.videok
+        var esemenyek=""
+        for(s in i.esemenyek) esemenyek+=s.datum+": "+ s.nev+ ", " +s.szervezo +"\n"
+        tv_exh.text=esemenyek
     }
 
     private fun requestByIdError(e:Throwable){
