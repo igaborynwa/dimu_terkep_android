@@ -16,6 +16,7 @@ import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
 import com.example.dimu_terkep.data.Institution
+import com.example.dimu_terkep.events.GetPinsResponseEvent
 import com.example.dimu_terkep.fragments.SearchDialogFragment
 import com.example.dimu_terkep.model.Intezmeny
 import com.example.dimu_terkep.model.IntezmenyPinDto
@@ -23,6 +24,9 @@ import com.example.dimu_terkep.model.IntezmenyTipus
 import com.example.dimu_terkep.network.TerkepInteractor
 import com.ianpinto.androidrangeseekbar.rangeseekbar.RangeSeekBar
 import kotlinx.android.synthetic.main.content_map.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import org.osmdroid.config.Configuration
 import org.osmdroid.views.overlay.Marker
 import java.util.*
@@ -81,6 +85,23 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
 
         initList()
         loadPins()
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onGetPinResponse(event: GetPinsResponseEvent) {
+        showMarkers(event.response)
+    }
+
+
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        EventBus.getDefault().unregister(this)
+        super.onStop()
     }
 
 

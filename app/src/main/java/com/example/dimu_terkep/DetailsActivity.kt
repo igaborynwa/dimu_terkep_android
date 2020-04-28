@@ -2,13 +2,20 @@ package com.example.dimu_terkep
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.text.Html
+import android.text.method.LinkMovementMethod
 import android.widget.Toast
 import com.example.dimu_terkep.data.Institution
+import com.example.dimu_terkep.events.GetDetailsResponseEvent
+import com.example.dimu_terkep.events.GetPinsResponseEvent
 import com.example.dimu_terkep.model.Intezmeny
 import com.example.dimu_terkep.network.TerkepInteractor
 
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.content_details.*
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class DetailsActivity : AppCompatActivity() {
     private var terkepInteractor = TerkepInteractor()
@@ -24,6 +31,21 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun loadDetails(id:String){
         terkepInteractor.getIntezmenyById(id, onSuccess = this::requestByIdSuccess, onError = this::requestByIdError )
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onGetDetailsResponse(event: GetDetailsResponseEvent) {
+        requestByIdSuccess(event.response)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        EventBus.getDefault().unregister(this)
+        super.onStop()
     }
 
     private fun requestByIdSuccess(i: Intezmeny){
@@ -44,7 +66,8 @@ class DetailsActivity : AppCompatActivity() {
         }
         tv_head.text=vezetok
         tv_desc.text=i.leiras
-        tv_links.text=i.link
+        tv_links.text=Html.fromHtml(i.link)
+        tv_links.movementMethod=LinkMovementMethod.getInstance()
         tv_media.text=i.videok
         var esemenyek=""
         for(s in i.esemenyek) esemenyek+=s.datum+": "+ s.nev+ ", " +s.szervezo +"\n"

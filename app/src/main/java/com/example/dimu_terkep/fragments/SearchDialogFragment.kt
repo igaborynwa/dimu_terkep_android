@@ -108,7 +108,7 @@ class SearchDialogFragment : DialogFragment() {
         cbList.add(viewAct.findViewById(R.id.cb_ettkocsgal))
 
         for(cb in cbList){
-            if(listener.getList().size==0) cb.isChecked=true
+            if(listener.getList().size==0) cb.isChecked=false
             else cb.isChecked = listener.getList().contains(IntezmenyTipus.desc(cb.text.toString(),a))
         }
 
