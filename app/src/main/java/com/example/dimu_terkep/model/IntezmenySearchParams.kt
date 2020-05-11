@@ -9,12 +9,12 @@ data class IntezmenySearchParams (
     val cim: String,
     @SerializedName("intezmenyVezeto")
     val vezeto: String,
+    @SerializedName("esemenyNev")
+    val esemeny: String,
     @SerializedName("mukodesTol")
     val tol: Int,
     @SerializedName("mukodesIg")
     val ig: Int,
-    /*@SerializedName("intezmenyTipus")
-    val tipus: List<IntezmenyTipus>*/
     @SerializedName("intezmenyTipus")
     val tiipus:List<Int>
 )

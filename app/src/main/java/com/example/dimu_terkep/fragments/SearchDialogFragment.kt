@@ -24,6 +24,7 @@ class SearchDialogFragment : DialogFragment() {
     private lateinit var etSearchName:EditText
     private lateinit var etSearchAddr:EditText
     private lateinit var etSearchHead:EditText
+    private lateinit var etSearchEvent:EditText
     private lateinit var viewAct: View
     private var listOfSelectedTypes= ArrayList<IntezmenyTipus>()
     private var cbList=ArrayList<CheckBox>()
@@ -31,13 +32,12 @@ class SearchDialogFragment : DialogFragment() {
 
 
     interface SearchListener{
-        fun searchParamChanged(name:String,addr: String,  head: String, list:ArrayList<IntezmenyTipus>)
+        fun searchParamChanged(name:String,addr: String,  head: String,event:String, list:ArrayList<IntezmenyTipus>)
         fun getList():ArrayList<IntezmenyTipus>
         fun getSearchName():String
         fun getSearchAddr():String
         fun getSearchHead():String
-
-
+        fun getSearchEventParam(): String
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +48,7 @@ class SearchDialogFragment : DialogFragment() {
             listener=act
         }
         else{
-            throw RuntimeException("Activity must implement Searchlistener")
+            throw RuntimeException("Activity must implement SearchListener")
         }
 
     }
@@ -64,12 +64,11 @@ class SearchDialogFragment : DialogFragment() {
         val builder = AlertDialog.Builder(activity!!)
 
         builder.setView(getContentView())
-        builder.setTitle("Keresés")
         builder.setPositiveButton("Keresés", DialogInterface.OnClickListener { dialogInterface, i ->
             checkList()
-            listener.searchParamChanged(etSearchName.text.toString(),etSearchAddr.text.toString(),etSearchHead.text.toString(), listOfSelectedTypes)
+            listener.searchParamChanged(etSearchName.text.toString(),etSearchAddr.text.toString(),etSearchHead.text.toString(),etSearchEvent.text.toString(), listOfSelectedTypes)
         })
-        builder.setNegativeButton("Cancel", null)
+        builder.setNegativeButton("Mégse", null)
         return builder.create()
 
     }
@@ -82,6 +81,9 @@ class SearchDialogFragment : DialogFragment() {
         etSearchAddr.setText(listener.getSearchAddr())
         etSearchHead=viewAct.findViewById(R.id.et_searchHead)
         etSearchHead.setText(listener.getSearchHead())
+        etSearchEvent=viewAct.findViewById(R.id.et_searchEvent)
+        etSearchEvent.setText(listener.getSearchEventParam())
+
 
         makeList()
         return viewAct
@@ -108,7 +110,9 @@ class SearchDialogFragment : DialogFragment() {
         cbList.add(viewAct.findViewById(R.id.cb_ettkocsgal))
 
         for(cb in cbList){
-            if(listener.getList().size==0) cb.isChecked=false
+            if(listener.getList().size==0) {
+                cb.isChecked=false
+            }
             else cb.isChecked = listener.getList().contains(IntezmenyTipus.desc(cb.text.toString(),a))
         }
 

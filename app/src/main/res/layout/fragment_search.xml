@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
               android:layout_height="match_parent" android:orientation="vertical">
 
     <ScrollView
@@ -9,77 +9,119 @@
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="vertical">
 
+            <TextView
+                    android:text="Keresési értékek"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/textView" android:textStyle="bold"
+                    app:fontFamily="@font/roboto_bold" android:textSize="24sp" android:paddingTop="10dp"
+                    android:paddingBottom="20dp"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/et_searchName" android:hint="Intézmény neve"/>
+                    android:fontFamily="@font/roboto_medium"
+                    android:id="@+id/et_searchName" android:hint="Intézmény neve" android:padding="8dp"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/et_searchAddr" android:hint="Intézmény címe"/>
+                    android:fontFamily="@font/roboto_medium"
+                    android:id="@+id/et_searchAddr" android:hint="Intézmény címe" android:padding="8dp"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
-                    android:id="@+id/et_searchHead" android:hint="Intézményvezető"/>
+                    android:fontFamily="@font/roboto_medium"
+                    android:id="@+id/et_searchHead" android:hint="Intézményvezető" android:padding="8dp"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:ems="1000"
+                    android:fontFamily="@font/roboto_medium"
+                    android:id="@+id/et_searchEvent" android:hint="Esemény neve" android:padding="8dp"/>
             <TextView
                     android:text="Szűrők"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/textView2" android:textStyle="bold"/>
+                    android:layout_height="wrap_content" android:id="@+id/textView2" android:textStyle="bold"
+                    app:fontFamily="@font/roboto_bold" android:textSize="24sp" android:paddingTop="30dp"
+                    android:paddingBottom="10dp"/>
             <CheckBox
                     android:text="@string/type1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/cb_allmuz" android:checked="true"/>
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_height="wrap_content" android:id="@+id/cb_allmuz" android:checked="true"
+                    android:textAllCaps="false" android:padding="8dp"/>
             <CheckBox
                     android:text="@string/type2"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/cb_allkulkoz" android:checked="true"/>
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_height="wrap_content" android:id="@+id/cb_allkulkoz" android:checked="true"
+                    android:padding="8dp"/>
             <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/cb_onkmuz"
+                    android:fontFamily="@font/roboto_medium"
                     android:text="@string/type3"
-                    android:checked="true"/>
+                    android:checked="true"
+                    android:padding="8dp"/>
             <CheckBox
                     android:text="@string/type4"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/cb_onkkulkozp" android:checked="true"/>
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_height="wrap_content" android:id="@+id/cb_onkkulkozp" android:checked="true"
+                    android:padding="8dp"/>
             <CheckBox
                     android:text="@string/type5"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/cb_onkgal" android:checked="true"/>
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_height="wrap_content" android:id="@+id/cb_onkgal" android:checked="true"
+                    android:padding="8dp"/>
             <CheckBox
                     android:text="@string/type6"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/cb_kergal" android:checked="true"/>
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_height="wrap_content" android:id="@+id/cb_kergal" android:checked="true"
+                    android:padding="8dp"/>
             <CheckBox
                     android:text="@string/type7"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/cb_fugkulint" android:checked="true"/>
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_height="wrap_content" android:id="@+id/cb_fugkulint" android:checked="true"
+                    android:padding="8dp"/>
             <CheckBox
                     android:text="@string/type8"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/cb_nonpgal" android:checked="true"/>
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_height="wrap_content" android:id="@+id/cb_nonpgal" android:checked="true"
+                    android:padding="8dp"/>
             <CheckBox
                     android:text="@string/type9"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/cb_kultint" android:checked="true"/>
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_height="wrap_content" android:id="@+id/cb_kultint" android:checked="true"
+                    android:padding="8dp"/>
             <CheckBox
                     android:text="@string/type10"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/cb_egyes" android:checked="true"/>
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_height="wrap_content" android:id="@+id/cb_egyes" android:checked="true"
+                    android:padding="8dp"/>
             <CheckBox
                     android:text="@string/type11"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/cb_oktint" android:checked="true"/>
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_height="wrap_content" android:id="@+id/cb_oktint" android:checked="true"
+                    android:padding="8dp"/>
             <CheckBox
                     android:text="@string/type12"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/cb_ettkocsgal" android:checked="true"/>
+                    android:fontFamily="@font/roboto_medium"
+                    android:layout_height="wrap_content" android:id="@+id/cb_ettkocsgal" android:checked="true"
+                    android:padding="8dp"/>
 
         </LinearLayout>
     </ScrollView>

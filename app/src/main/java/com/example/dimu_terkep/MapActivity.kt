@@ -1,9 +1,8 @@
 package com.example.dimu_terkep
 
 import android.content.Intent
-import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
 
 import kotlinx.android.synthetic.main.activity_map.*
@@ -11,26 +10,28 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import android.preference.PreferenceManager
-import android.support.v4.content.ContextCompat.startActivity
-import android.widget.SeekBar
+import android.support.v4.content.ContextCompat
 import android.widget.TextView
 import android.widget.Toast
 import com.example.dimu_terkep.data.Institution
 import com.example.dimu_terkep.events.GetPinsResponseEvent
 import com.example.dimu_terkep.fragments.SearchDialogFragment
-import com.example.dimu_terkep.model.Intezmeny
 import com.example.dimu_terkep.model.IntezmenyPinDto
 import com.example.dimu_terkep.model.IntezmenyTipus
 import com.example.dimu_terkep.network.TerkepInteractor
 import com.ianpinto.androidrangeseekbar.rangeseekbar.RangeSeekBar
-import kotlinx.android.synthetic.main.content_map.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import org.osmdroid.config.Configuration
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.views.overlay.OverlayItem
 import java.util.*
 import kotlin.collections.ArrayList
+import org.osmdroid.views.overlay.ItemizedIconOverlay
+import org.osmdroid.views.overlay.ItemizedOverlayWithFocus
+
+
 
 
 class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
@@ -43,6 +44,7 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
     private  var searchName=""
     private  var searchAddr=""
     private var searchHead=""
+    private var searchEvent=""
     private var typeList= ArrayList<IntezmenyTipus>()
     private var markerList =ArrayList<Marker>()
 
@@ -61,8 +63,10 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx))
         map = findViewById(R.id.map)
         map.setTileSource(TileSourceFactory.MAPNIK)
-        map.setBuiltInZoomControls(true)
+        map.setBuiltInZoomControls(false)
         map.setMultiTouchControls(true)
+
+        //map.setBackgroundColor(Color.BLACK)
         val mapController = map.controller
         mapController.setZoom(15)
         val startPoint = GeoPoint(47.4983563703, 19.0409786879)
@@ -106,8 +110,16 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
 
 
     private fun loadPins() {
-        terkepInteractor.getIntezmeny(searchName,searchAddr,searchHead, seekBar.selectedMinValue, seekBar.selectedMaxValue, typeList,
+        terkepInteractor.getIntezmeny(searchName,searchAddr,searchHead,searchEvent, seekBar.selectedMinValue, seekBar.selectedMaxValue, typeList,
             onSuccess = this::showMarkers, onError = this::showError)
+    }
+
+    private fun getIcon(i: IntezmenyPinDto): Int {
+        when(i.type){
+            0 -> return R.drawable.mymarker
+            else -> return  R.drawable.mymarker
+
+        }
     }
 
 
@@ -118,17 +130,42 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         map.invalidate()
         //for(m in markerList) markerList.remove(m)
         for(i in intezmenyek){
-            val marker = Marker(map)
+            /*val marker = Marker(map)
             marker.position= GeoPoint(i.latitude, i.longitude)
-            marker.textLabelBackgroundColor= Color.RED
-            marker.textLabelForegroundColor=Color.RED
+           marker.icon=ContextCompat.getDrawable(this, R.drawable.markerred)
+
+
 
             marker.setOnMarkerClickListener { m, mapView ->
                 showDetails(i)
                 true
             }
+
+            marker.setAnchor(Marker.ANCHOR_CENTER,Marker.ANCHOR_BOTTOM)
+
             map.overlays.add(marker)
-            markerList.add(marker)
+            markerList.add(marker)*/
+
+            val items = ArrayList<OverlayItem>()
+            val item =OverlayItem("Title", "Description", GeoPoint(i.latitude, i.longitude))
+            item.setMarker(ContextCompat.getDrawable(this, R.drawable.markerred))
+            item.markerHotspot=OverlayItem.HotspotPlace.BOTTOM_CENTER
+            items.add(item)
+
+//the overlay
+            val mOverlay = ItemizedOverlayWithFocus<OverlayItem>(items,
+                object : ItemizedIconOverlay.OnItemGestureListener<OverlayItem> {
+                    override fun onItemSingleTapUp(index: Int, item: OverlayItem): Boolean {
+                        showDetails(i)
+                        return true
+                    }
+
+                    override fun onItemLongPress(index: Int, item: OverlayItem): Boolean {
+                        return false
+                    }
+                },applicationContext)
+            //mOverlay.setFocusItemsOnTap(true)
+            map.getOverlays().add(mOverlay)
 
         }
     }
@@ -188,10 +225,11 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
     }
 
 
-    override fun searchParamChanged(name:String, addr:String,  head: String, list:ArrayList<IntezmenyTipus>) {
+    override fun searchParamChanged(name:String, addr:String,  head: String, event: String, list:ArrayList<IntezmenyTipus>) {
         searchName=name
         searchAddr=addr
         searchHead=head
+        searchEvent=event
         typeList=list
         loadPins()
 
@@ -209,6 +247,9 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         return searchHead
     }
 
+    override fun getSearchEventParam(): String {
+        return searchEvent
+    }
 
     override fun getList():ArrayList<IntezmenyTipus>{
         return typeList

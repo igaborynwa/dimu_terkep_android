@@ -35,7 +35,7 @@
             android:layout_marginRight="8dp"
             android:background="#FFFFFF"
             android:textColor="#070707" android:textSize="24sp"
-            app:layout_constraintBottom_toTopOf="@+id/simpleSeekBar"/>
+            app:layout_constraintBottom_toTopOf="@+id/simpleSeekBar" app:fontFamily="@font/roboto_bold"/>
 
 
 
