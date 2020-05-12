@@ -19,6 +19,8 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import android.content.Intent
 import android.net.Uri
+import android.support.v4.content.ContextCompat
+import com.example.dimu_terkep.model.IntezmenyTipus
 
 
 class DetailsActivity : AppCompatActivity() {
@@ -54,7 +56,8 @@ class DetailsActivity : AppCompatActivity() {
 
     private fun requestByIdSuccess(i: Intezmeny){
         intezmeny=i
-        title = i.nev
+        title=""
+        tvTitle.text= i.nev
         var cim =""
         for(s in i.intezmenyHelyszinek) {
             var kolt =""
@@ -71,7 +74,7 @@ class DetailsActivity : AppCompatActivity() {
         tv_head.text=vezetok
         tv_desc.text=i.leiras
 
-
+        imageView.setImageDrawable(ContextCompat.getDrawable(this, getIcon(i)))
         tv_links.text=Html.fromHtml(i.link)
         tv_links.movementMethod=LinkMovementMethod.getInstance()
 
@@ -79,6 +82,25 @@ class DetailsActivity : AppCompatActivity() {
         var esemenyek=""
         for(s in i.esemenyek) esemenyek+=s.datum+": "+ s.nev+ ", " +s.szervezo +"\n"
         tv_exh.text=esemenyek
+    }
+
+    private fun getIcon(i: Intezmeny): Int{
+
+        return when(i.tipus){
+            0 -> R.drawable.ikonallmuz
+            1 -> R.drawable.ikonallkulkozp
+            2 -> R.drawable.ikononkmuz
+            3 -> R.drawable.ikononkkulkozp
+            4 -> R.drawable.ikononkgal
+            5 -> R.drawable.ikonkergal
+            6 -> R.drawable.ikonfuggkultint
+            7 -> R.drawable.ikonnonp
+            8 -> R.drawable.ikonkultint
+            9 -> R.drawable.ikonegy
+            10 -> R.drawable.ikonoktint
+            else -> R.drawable.ikonett
+
+        }
     }
 
     private fun requestByIdError(e:Throwable){

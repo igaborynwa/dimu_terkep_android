@@ -18,5 +18,13 @@
             android:layout_margin="@dimen/fab_margin"
             app:srcCompat="@android:drawable/ic_search_category_default" app:layout_anchorGravity="end|top"
             app:layout_anchor="@+id/include" app:backgroundTint="#FFFFFF"/>
+    <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@android:drawable/ic_menu_info_details" app:layout_anchorGravity="start|top"
+            app:layout_anchor="@+id/include" app:backgroundTint="#FFFFFF"/>
 
 </android.support.design.widget.CoordinatorLayout>

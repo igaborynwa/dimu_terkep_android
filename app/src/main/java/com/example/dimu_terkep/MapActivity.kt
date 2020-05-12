@@ -115,9 +115,19 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
     }
 
     private fun getIcon(i: IntezmenyPinDto): Int {
-        when(i.type){
-            0 -> return R.drawable.mymarker
-            else -> return  R.drawable.mymarker
+        return when(i.type){
+            0 -> R.drawable.markerallmuz
+            1 -> R.drawable.markerallkulkozp
+            2 -> R.drawable.markeronkmuz
+            3 -> R.drawable.markeronkkultkozp
+            4 -> R.drawable.markeronkgal
+            5 -> R.drawable.markerkergal
+            6 -> R.drawable.markerfuggkult
+            7 -> R.drawable.markernonprof
+            8 -> R.drawable.markerkultint
+            9 -> R.drawable.markeregy
+            10 -> R.drawable.markerokt
+            else -> R.drawable.markerett
 
         }
     }
@@ -132,7 +142,7 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         for(i in intezmenyek){
             /*val marker = Marker(map)
             marker.position= GeoPoint(i.latitude, i.longitude)
-           marker.icon=ContextCompat.getDrawable(this, R.drawable.markerred)
+           //marker.icon=ContextCompat.getDrawable(this, R.drawable.markerred)
 
 
 
@@ -148,8 +158,9 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
 
             val items = ArrayList<OverlayItem>()
             val item =OverlayItem("Title", "Description", GeoPoint(i.latitude, i.longitude))
-            item.setMarker(ContextCompat.getDrawable(this, R.drawable.markerred))
+            item.setMarker(ContextCompat.getDrawable(this, getIcon(i)))
             item.markerHotspot=OverlayItem.HotspotPlace.BOTTOM_CENTER
+
             items.add(item)
 
 //the overlay

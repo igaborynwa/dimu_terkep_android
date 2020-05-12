@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Artlas</string>
+    <string name="app_name">ArtlasBudapest</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="terkep">Térkép</string>

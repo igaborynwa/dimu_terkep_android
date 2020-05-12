@@ -14,7 +14,7 @@ data class Intezmeny (
     @SerializedName("intezmenyHelyszinek")
     val intezmenyHelyszinek: List<IntezmenyHelyszin>,
     @SerializedName("tipus")
-    val tipus: IntezmenyTipus,
+    val tipus: Int,
     @SerializedName("intezmenyVezetok")
     val intezmenyVezetok: List<IntezmenyVezeto>,
     @SerializedName("leiras")
