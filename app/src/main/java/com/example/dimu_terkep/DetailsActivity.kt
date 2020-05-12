@@ -59,14 +59,16 @@ class DetailsActivity : AppCompatActivity() {
         title=""
         tvTitle.text= i.nev
         var cim =""
-        for(s in i.intezmenyHelyszinek) {
+        val sortedHelyszin=i.intezmenyHelyszinek.sortedWith(compareBy { it.nyitas })
+        for(s in sortedHelyszin) {
             var kolt =""
             if(s.koltozes!=0) kolt=s.koltozes.toString()
             cim+=s.helyszin+" ("+s.nyitas.toString()+" - "+ kolt + ")\n"
         }
         tv_addr.text=cim
         var vezetok =""
-        for(s in i.intezmenyVezetok) {
+        val sortedVezeto=i.intezmenyVezetok.sortedWith(compareBy { it.tol })
+        for(s in sortedVezeto) {
             var ig=""
             if(s.ig!=0) ig=s.ig.toString()
             vezetok+=s.nev+" ("+ s.tol.toString()+" -  "+ig +")\n"
@@ -79,8 +81,10 @@ class DetailsActivity : AppCompatActivity() {
         tv_links.movementMethod=LinkMovementMethod.getInstance()
 
         tv_media.text=i.videok
+
         var esemenyek=""
-        for(s in i.esemenyek) esemenyek+=s.datum+": "+ s.nev+ ", " +s.szervezo +"\n"
+        val sortedEsemeny=i.esemenyek.sortedWith(compareBy { it.datum })
+        for(s in sortedEsemeny) esemenyek+=s.datum+": "+ s.nev+ ", " +s.szervezo +"\n"
         tv_exh.text=esemenyek
     }
 
