@@ -59,6 +59,11 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
             val searchFragment = SearchDialogFragment()
             searchFragment.show(supportFragmentManager, "TAG")
         }
+        fab2.setOnClickListener { v ->
+            val intent = Intent(this, InfoActivity::class.java)
+            startActivity(intent)
+        }
+
         val ctx = applicationContext
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx))
         map = findViewById(R.id.map)
