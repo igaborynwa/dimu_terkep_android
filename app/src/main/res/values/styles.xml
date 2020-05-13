@@ -11,6 +11,7 @@
         <item name="android:radioButtonStyle">@style/MyRadioButtonStyle</item>
         <item name="checkboxStyle">@style/MyCheckBoxStyle</item>
         <item name="android:checkboxStyle">@style/MyCheckBoxStyle</item>
+        <item name="fontFamily">@font/roboto_medium</item>
     </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>

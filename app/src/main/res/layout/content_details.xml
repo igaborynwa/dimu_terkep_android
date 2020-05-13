@@ -17,57 +17,68 @@
                     android:text="@string/az_int_zm_ny_c_me"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/textView16" android:layout_weight="1"
-                    android:textStyle="bold" app:fontFamily="@font/roboto_bold" android:textSize="24sp"/>
+                    android:textStyle="bold" app:fontFamily="@font/roboto_bold" android:textSize="24sp"
+                    android:paddingLeft="24dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/tv_addr" android:layout_weight="1"
-                    app:fontFamily="@font/roboto_light" android:padding="10dp"/>
+                    app:fontFamily="@font/roboto_light" android:paddingLeft="24dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:paddingRight="24dp"/>
             <TextView
                     android:text="@string/int_zm_nyvezet_k"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/textView15" android:layout_weight="1"
-                    android:textStyle="bold" app:fontFamily="@font/roboto_bold" android:textSize="24sp"/>
+                    android:textStyle="bold" app:fontFamily="@font/roboto_bold" android:textSize="24sp"
+                    android:paddingLeft="24dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/tv_head" android:layout_weight="1"
-                    app:fontFamily="@font/roboto_light" android:padding="10dp"/>
+                    app:fontFamily="@font/roboto_light" android:paddingLeft="24dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:paddingRight="24dp"/>
             <TextView
                     android:text="@string/le_r_s"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/textView19" android:layout_weight="1"
-                    android:textStyle="bold" app:fontFamily="@font/roboto_bold" android:textSize="24sp"/>
+                    android:textStyle="bold" app:fontFamily="@font/roboto_bold" android:textSize="24sp"
+                    android:paddingLeft="24dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/tv_desc" android:layout_weight="1"
-                    app:fontFamily="@font/roboto_light" android:padding="10dp"/>
+                    app:fontFamily="@font/roboto_light" android:paddingLeft="24dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:paddingRight="24dp"/>
             <TextView
                     android:text="@string/fontosabb_ki_ll_t_sok"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/textView21" android:layout_weight="1"
-                    android:textStyle="bold" app:fontFamily="@font/roboto_bold" android:textSize="24sp"/>
+                    android:textStyle="bold" app:fontFamily="@font/roboto_bold" android:textSize="24sp"
+                    android:paddingLeft="24dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/tv_exh" android:layout_weight="1"
-                    app:fontFamily="@font/roboto_light" android:padding="10dp"/>
+                    app:fontFamily="@font/roboto_light" android:paddingLeft="24dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:paddingRight="24dp"/>
             <TextView
                     android:text="@string/hivatkoz_sok"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/textView23" android:layout_weight="1"
-                    android:textStyle="bold" app:fontFamily="@font/roboto_bold" android:textSize="24sp"/>
+                    android:textStyle="bold" app:fontFamily="@font/roboto_bold" android:textSize="24sp" android:paddingLeft="24dp"
+            />
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/tv_links" android:layout_weight="1"
-                    app:fontFamily="@font/roboto_light" android:padding="10dp"
+                    app:fontFamily="@font/roboto_light" android:paddingLeft="24dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:paddingRight="24dp"
                  android:autoLink="all" android:textColorLink="#000000"/>
             <TextView
                     android:text="@string/m_diatartalom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/textView26" android:layout_weight="1"
-                    android:textStyle="bold" app:fontFamily="@font/roboto_bold" android:textSize="24sp"/>
+                    android:textStyle="bold" app:fontFamily="@font/roboto_bold" android:textSize="24sp" android:paddingLeft="24dp"/>
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/tv_media" android:layout_weight="1"
-                    app:fontFamily="@font/roboto_light" android:padding="10dp"
+                    app:fontFamily="@font/roboto_light" android:paddingLeft="24dp" android:paddingTop="10dp"
+                    android:paddingBottom="10dp" android:paddingRight="24dp"
                     android:autoLink="all" android:textColorLink="#000000"
             />
         </LinearLayout>

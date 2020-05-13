@@ -11,8 +11,8 @@
 
 
     <org.osmdroid.views.MapView android:id="@+id/map"
-                                android:layout_width="416dp"
-                                android:layout_height="735dp"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
                                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="32dp"/>
     <com.ianpinto.androidrangeseekbar.rangeseekbar.RangeSeekBar
