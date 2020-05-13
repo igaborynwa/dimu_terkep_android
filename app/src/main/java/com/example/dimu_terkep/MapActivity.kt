@@ -71,7 +71,6 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         map.setBuiltInZoomControls(false)
         map.setMultiTouchControls(true)
 
-        //map.setBackgroundColor(Color.BLACK)
         val mapController = map.controller
         mapController.setZoom(15)
         val startPoint = GeoPoint(47.4983563703, 19.0409786879)
@@ -140,26 +139,10 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
 
 
     private fun showMarkers(intezmenyek:List<IntezmenyPinDto>){
-        //Toast.makeText(applicationContext, "success", Toast.LENGTH_LONG).show()
         map.overlays.clear()
         map.invalidate()
-        //for(m in markerList) markerList.remove(m)
         for(i in intezmenyek){
-            /*val marker = Marker(map)
-            marker.position= GeoPoint(i.latitude, i.longitude)
-           //marker.icon=ContextCompat.getDrawable(this, R.drawable.markerred)
 
-
-
-            marker.setOnMarkerClickListener { m, mapView ->
-                showDetails(i)
-                true
-            }
-
-            marker.setAnchor(Marker.ANCHOR_CENTER,Marker.ANCHOR_BOTTOM)
-
-            map.overlays.add(marker)
-            markerList.add(marker)*/
 
             val items = ArrayList<OverlayItem>()
             val item =OverlayItem("Title", "Description", GeoPoint(i.latitude, i.longitude))
@@ -180,13 +163,12 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
                         return false
                     }
                 },applicationContext)
-            //mOverlay.setFocusItemsOnTap(true)
             map.getOverlays().add(mOverlay)
 
         }
     }
     private fun showError(e: Throwable) {
-        Toast.makeText(applicationContext, "error", Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, "Az adatok letöltése sikertelen!", Toast.LENGTH_LONG).show()
         e.printStackTrace()
     }
 
@@ -216,19 +198,7 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
 
     }
 
-    private fun addMarkers(){
-        map.overlays.clear()
-        map.invalidate()
-        for(i in inst){
-            if(i.isValid(seekBar.selectedMinValue, seekBar.selectedMaxValue)) {
-                i.getMarker().setOnMarkerClickListener { marker, mapView ->
-                    //showDetails(marker)
-                    true
-                }
-                map.overlays.add(i.getMarker())
-            }
-        }
-    }
+
 
     override fun onResume() {
         super.onResume()

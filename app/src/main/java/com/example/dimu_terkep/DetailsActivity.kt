@@ -108,7 +108,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun requestByIdError(e:Throwable){
-        Toast.makeText(applicationContext, "error", Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, "Az adatok letöltése sikertelen!", Toast.LENGTH_LONG).show()
         e.printStackTrace()
     }
 }
