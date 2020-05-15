@@ -22,4 +22,14 @@
     <string name="type11">Oktatási intézmény</string>
     <string name="type12">Étterem, kocsma, galéria</string>
     <string name="titleInfo">Jelmagyarázat</string>
+    <string name="btn_keres">Keresés</string>
+    <string name="btn_megse">Mégse</string>
+    <string name="halozat_hiba">Az adatok letöltése sikertelen!</string>
+    <string name="nem_elerheto">Nem elérhető a hálózat</string>
+    <string name="keres_si_rt_kek">Keresési értékek</string>
+    <string name="nev_hint">Intézmény neve</string>
+    <string name="cim_hint">Intézmény címe</string>
+    <string name="vezeto_hint">Intézményvezető</string>
+    <string name="esemeny_hint">Esemény neve</string>
+    <string name="szurok">Szűrők</string>
 </resources>

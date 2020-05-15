@@ -2,19 +2,15 @@ package com.example.dimu_terkep.fragments
 
 import android.app.Activity
 import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import android.support.v7.app.AlertDialog
 import android.view.LayoutInflater
 import android.view.View
 import android.graphics.Color
-import android.text.Editable
 import com.example.dimu_terkep.R
 import android.widget.*
 import com.example.dimu_terkep.model.IntezmenyTipus
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.fragment_search.*
 import android.view.ViewGroup
 
 
@@ -74,24 +70,24 @@ class SearchDialogFragment : DialogFragment() {
         val builder = AlertDialog.Builder(activity!!)
 
         builder.setView(getContentView())
-        builder.setPositiveButton("Keresés", DialogInterface.OnClickListener { dialogInterface, i ->
+        builder.setPositiveButton(getString(R.string.btn_keres)) { _, _ ->
             checkList()
             listener.searchParamChanged(etSearchName.text.toString(),etSearchAddr.text.toString(),etSearchHead.text.toString(),etSearchEvent.text.toString(), listOfSelectedTypes)
-        })
-        builder.setNegativeButton("Mégse", null)
+        }
+        builder.setNegativeButton(getString(R.string.btn_megse), null)
         return builder.create()
 
     }
     private fun getContentView(): View {
-        viewAct = LayoutInflater.from(context).inflate(com.example.dimu_terkep.R.layout.fragment_search, null)
+        viewAct = LayoutInflater.from(context).inflate(R.layout.fragment_search, null)
 
-        etSearchName=viewAct.findViewById(com.example.dimu_terkep.R.id.et_searchName)
+        etSearchName=viewAct.findViewById(R.id.et_searchName)
         etSearchName.setText(listener.getSearchName())
-        etSearchAddr=viewAct.findViewById(com.example.dimu_terkep.R.id.et_searchAddr)
+        etSearchAddr=viewAct.findViewById(R.id.et_searchAddr)
         etSearchAddr.setText(listener.getSearchAddr())
-        etSearchHead=viewAct.findViewById(com.example.dimu_terkep.R.id.et_searchHead)
+        etSearchHead=viewAct.findViewById(R.id.et_searchHead)
         etSearchHead.setText(listener.getSearchHead())
-        etSearchEvent=viewAct.findViewById(com.example.dimu_terkep.R.id.et_searchEvent)
+        etSearchEvent=viewAct.findViewById(R.id.et_searchEvent)
         etSearchEvent.setText(listener.getSearchEventParam())
 
 
@@ -106,18 +102,18 @@ class SearchDialogFragment : DialogFragment() {
     }
 
     private fun makeList(){
-        cbList.add(viewAct.findViewById(com.example.dimu_terkep.R.id.cb_allmuz))
-        cbList.add(viewAct.findViewById(com.example.dimu_terkep.R.id.cb_allkulkoz))
-        cbList.add(viewAct.findViewById(com.example.dimu_terkep.R.id.cb_onkmuz))
-        cbList.add(viewAct.findViewById(com.example.dimu_terkep.R.id.cb_onkkulkozp))
-        cbList.add(viewAct.findViewById(com.example.dimu_terkep.R.id.cb_onkgal))
-        cbList.add(viewAct.findViewById(com.example.dimu_terkep.R.id.cb_kergal))
-        cbList.add(viewAct.findViewById(com.example.dimu_terkep.R.id.cb_fugkulint))
-        cbList.add(viewAct.findViewById(com.example.dimu_terkep.R.id.cb_nonpgal))
-        cbList.add(viewAct.findViewById(com.example.dimu_terkep.R.id.cb_kultint))
-        cbList.add(viewAct.findViewById(com.example.dimu_terkep.R.id.cb_egyes))
-        cbList.add(viewAct.findViewById(com.example.dimu_terkep.R.id.cb_oktint))
-        cbList.add(viewAct.findViewById(com.example.dimu_terkep.R.id.cb_ettkocsgal))
+        cbList.add(viewAct.findViewById(R.id.cb_allmuz))
+        cbList.add(viewAct.findViewById(R.id.cb_allkulkoz))
+        cbList.add(viewAct.findViewById(R.id.cb_onkmuz))
+        cbList.add(viewAct.findViewById(R.id.cb_onkkulkozp))
+        cbList.add(viewAct.findViewById(R.id.cb_onkgal))
+        cbList.add(viewAct.findViewById(R.id.cb_kergal))
+        cbList.add(viewAct.findViewById(R.id.cb_fugkulint))
+        cbList.add(viewAct.findViewById(R.id.cb_nonpgal))
+        cbList.add(viewAct.findViewById(R.id.cb_kultint))
+        cbList.add(viewAct.findViewById(R.id.cb_egyes))
+        cbList.add(viewAct.findViewById(R.id.cb_oktint))
+        cbList.add(viewAct.findViewById(R.id.cb_ettkocsgal))
 
         for(cb in cbList){
             if(listener.getList().size==0) {

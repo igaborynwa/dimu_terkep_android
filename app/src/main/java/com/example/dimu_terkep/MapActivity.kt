@@ -1,7 +1,6 @@
 package com.example.dimu_terkep
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity;
 
@@ -13,7 +12,6 @@ import android.preference.PreferenceManager
 import android.support.v4.content.ContextCompat
 import android.widget.TextView
 import android.widget.Toast
-import com.example.dimu_terkep.data.Institution
 import com.example.dimu_terkep.events.GetPinsResponseEvent
 import com.example.dimu_terkep.fragments.SearchDialogFragment
 import com.example.dimu_terkep.model.IntezmenyPinDto
@@ -46,10 +44,9 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
     private var searchHead=""
     private var searchEvent=""
     private var typeList= ArrayList<IntezmenyTipus>()
-    private var markerList =ArrayList<Marker>()
 
 
-    private val inst =ArrayList<Institution>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,6 +67,7 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         map.setTileSource(TileSourceFactory.MAPNIK)
         map.setBuiltInZoomControls(false)
         map.setMultiTouchControls(true)
+
 
         val mapController = map.controller
         mapController.setZoom(15)
@@ -145,7 +143,7 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
 
 
             val items = ArrayList<OverlayItem>()
-            val item =OverlayItem("Title", "Description", GeoPoint(i.latitude, i.longitude))
+            val item =OverlayItem("", "", GeoPoint(i.latitude, i.longitude))
             item.setMarker(ContextCompat.getDrawable(this, getIcon(i)))
             item.markerHotspot=OverlayItem.HotspotPlace.BOTTOM_CENTER
 
@@ -168,7 +166,7 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         }
     }
     private fun showError(e: Throwable) {
-        Toast.makeText(applicationContext, "Az adatok letöltése sikertelen!", Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, R.string.nem_elerheto, Toast.LENGTH_LONG).show()
         e.printStackTrace()
     }
 

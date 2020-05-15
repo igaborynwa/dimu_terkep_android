@@ -4,11 +4,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Html
 import android.text.method.LinkMovementMethod
-import android.view.View
 import android.widget.Toast
-import com.example.dimu_terkep.data.Institution
 import com.example.dimu_terkep.events.GetDetailsResponseEvent
-import com.example.dimu_terkep.events.GetPinsResponseEvent
 import com.example.dimu_terkep.model.Intezmeny
 import com.example.dimu_terkep.network.TerkepInteractor
 
@@ -17,10 +14,7 @@ import kotlinx.android.synthetic.main.content_details.*
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
-import android.content.Intent
-import android.net.Uri
 import android.support.v4.content.ContextCompat
-import com.example.dimu_terkep.model.IntezmenyTipus
 
 
 class DetailsActivity : AppCompatActivity() {
@@ -108,7 +102,7 @@ class DetailsActivity : AppCompatActivity() {
     }
 
     private fun requestByIdError(e:Throwable){
-        Toast.makeText(applicationContext, "Az adatok letöltése sikertelen!", Toast.LENGTH_LONG).show()
+        Toast.makeText(applicationContext, getString(R.string.halozat_hiba), Toast.LENGTH_LONG).show()
         e.printStackTrace()
     }
 }

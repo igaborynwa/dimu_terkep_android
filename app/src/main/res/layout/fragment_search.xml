@@ -12,7 +12,7 @@
                       android:orientation="vertical" android:paddingLeft="8dp">
 
             <TextView
-                    android:text="Keresési értékek"
+                    android:text="@string/keres_si_rt_kek"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/textView" android:textStyle="bold"
                     app:fontFamily="@font/roboto_bold" android:textSize="24sp" android:paddingTop="10dp"
@@ -23,30 +23,30 @@
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:fontFamily="@font/roboto_medium"
-                    android:id="@+id/et_searchName" android:hint="Intézmény neve" android:padding="8dp"/>
+                    android:id="@+id/et_searchName" android:hint="@string/nev_hint" android:padding="8dp"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:fontFamily="@font/roboto_medium"
-                    android:id="@+id/et_searchAddr" android:hint="Intézmény címe" android:padding="8dp"/>
+                    android:id="@+id/et_searchAddr" android:hint="@string/cim_hint" android:padding="8dp"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="10"
                     android:fontFamily="@font/roboto_medium"
-                    android:id="@+id/et_searchHead" android:hint="Intézményvezető" android:padding="8dp"/>
+                    android:id="@+id/et_searchHead" android:hint="@string/vezeto_hint" android:padding="8dp"/>
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     android:ems="1000"
                     android:fontFamily="@font/roboto_medium"
-                    android:id="@+id/et_searchEvent" android:hint="Esemény neve" android:padding="8dp"/>
+                    android:id="@+id/et_searchEvent" android:hint="@string/esemeny_hint" android:padding="8dp"/>
             <TextView
-                    android:text="Szűrők"
+                    android:text="@string/szurok"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/textView2" android:textStyle="bold"
                     app:fontFamily="@font/roboto_bold" android:textSize="24sp" android:paddingTop="30dp"

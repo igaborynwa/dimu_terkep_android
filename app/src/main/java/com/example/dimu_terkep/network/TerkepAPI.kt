@@ -15,14 +15,6 @@ interface TerkepAPI {
     @POST("Intezmeny")
     fun getIntezmeny(@Body param: IntezmenySearchParams): Call<List<IntezmenyPinDto>>
 
-    /*@Multipart
-    @GET("Intezmeny")
-    fun getIntezmeny(@Part("intezmenyNev") nev:String,
-                     @Part("intezmenyCim") cim: String,
-                     @Part("intezmenyVezeto") vezeto: String,
-                     @Part("mukodesTol") tol: Int,
-                     @Part("mukodesIg") ig: Int,
-                     @Part("intezmenTipus") tipus: List<Int>): Call<List<IntezmenyPinDto>>*/
 
     @GET("Intezmeny/{id}")
     fun getIntezmenyById(@Path("id") id: String ): Call<Intezmeny>

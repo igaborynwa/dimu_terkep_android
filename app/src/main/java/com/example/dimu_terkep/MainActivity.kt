@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
             val activeNetworkInfo = connectivityManager.activeNetworkInfo
             val isNetworkAvailable = activeNetworkInfo != null && activeNetworkInfo.isConnected
-            if(!isNetworkAvailable) Toast.makeText(applicationContext,"Nem elérhető a hálózat", Toast.LENGTH_LONG).show()
+            if(!isNetworkAvailable) Toast.makeText(applicationContext,getString(R.string.nem_elerheto), Toast.LENGTH_LONG).show()
             else createMap()
         }
     }
@@ -46,14 +46,4 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 }
