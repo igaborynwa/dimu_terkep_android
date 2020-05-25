@@ -24,7 +24,7 @@ enum class IntezmenyTipus(val i:Int) {
                 a.getString(R.string.type2) ->return AllamiKuturalis
                 a.getString(R.string.type3) ->return OnkormanyzatiMuzeum
                 a.getString(R.string.type4) ->return OnkormanyzatiKulturalis
-                a.getString(R.string.type5) ->return OnkormanyzatiGaleria
+                 a.getString(R.string.type5) ->return OnkormanyzatiGaleria
                 a.getString(R.string.type6) ->return KereskedelmGaleria
                 a.getString(R.string.type7) ->return FuggetlenKulturalisIntezmeny
                 a.getString(R.string.type8) ->return NonProfitGaleria

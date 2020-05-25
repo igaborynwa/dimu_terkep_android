@@ -1,5 +1,6 @@
 package com.example.dimu_terkep
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.Html
@@ -15,6 +16,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import android.support.v4.content.ContextCompat
+import kotlinx.android.synthetic.main.activity_map.*
 
 
 class DetailsActivity : AppCompatActivity() {
@@ -24,7 +26,10 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
         setSupportActionBar(toolbar)
-
+        ivIcon.setOnClickListener { v ->
+            val intent = Intent(this, InfoActivity::class.java)
+            startActivity(intent)
+        }
         val id = intent.getSerializableExtra("intezmenyId") as String
         loadDetails(id)
     }
@@ -70,7 +75,7 @@ class DetailsActivity : AppCompatActivity() {
         tv_head.text=vezetok
         tv_desc.text=i.leiras
 
-        imageView.setImageDrawable(ContextCompat.getDrawable(this, getIcon(i)))
+        ivIcon.setImageDrawable(ContextCompat.getDrawable(this, getIcon(i)))
         tv_links.text=Html.fromHtml(i.link)
         tv_links.movementMethod=LinkMovementMethod.getInstance()
 

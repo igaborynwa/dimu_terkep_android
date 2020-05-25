@@ -1,5 +1,6 @@
 package com.example.dimu_terkep
 
+import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.example.dimu_terkep.model.IntezmenyPinDto
 import com.example.dimu_terkep.model.IntezmenyTipus
 import com.example.dimu_terkep.network.TerkepInteractor
 import com.ianpinto.androidrangeseekbar.rangeseekbar.RangeSeekBar
+import com.livinglifetechway.quickpermissions.annotations.WithPermissions
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -47,7 +49,9 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
 
 
 
-
+    @WithPermissions(
+        permissions = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE]
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
