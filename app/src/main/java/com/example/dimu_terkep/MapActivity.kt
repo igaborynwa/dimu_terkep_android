@@ -79,7 +79,7 @@ class MapActivity : AppCompatActivity(), SearchDialogFragment.SearchListener {
         mapController.setCenter(startPoint)
         seekBar=findViewById(R.id.simpleSeekBar)
         tv=findViewById(R.id.tvProgress)
-        seekBar.setRangeValues(1700,Calendar.getInstance().get(Calendar.YEAR))
+        seekBar.setRangeValues(1788,Calendar.getInstance().get(Calendar.YEAR))
         seekBar.selectedMaxValue=Calendar.getInstance().get(Calendar.YEAR)
         seekBar.selectedMinValue=1700
         tv.text=seekBar.selectedMinValue.toString()+" - " + seekBar.selectedMaxValue.toString()
